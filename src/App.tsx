@@ -1,22 +1,23 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
-import {Colors} from '@styles';
+import {StyleSheet, Text, View} from 'react-native';
+import {Colors, Typography} from '@styles';
 import Layout from '@components/Layout';
 
 const App = () => {
     return (
         <Layout>
             <View>
-                <Text>test</Text>
+                <Text style={[Typography.FONT.LIGHT, styles.title]}>Test</Text>
             </View>
         </Layout>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.WHITE,
-    },
+	title: {
+		fontSize: Typography.FONT_SIZE_16,
+		lineHeight: Typography.LINE_HEIGHT_20
+	}
 });
 
 export default App;
