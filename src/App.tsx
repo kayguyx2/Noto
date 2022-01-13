@@ -7,7 +7,7 @@ const App = () => {
     return (
         <Layout>
             <View>
-                <Text style={[Typography.FONT.LIGHT, styles.title]}>Test</Text>
+                <Text style={[Typography.FONT.REGULAR, styles.title]}>Test React Native</Text>
             </View>
         </Layout>
     );
@@ -15,8 +15,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: Typography.FONT_SIZE_16,
-		lineHeight: Typography.LINE_HEIGHT_20
+		fontSize: Typography.LINE_HEIGHT_28,
 	}
 });
 

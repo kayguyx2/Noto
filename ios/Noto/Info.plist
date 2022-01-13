@@ -53,9 +53,9 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Lamoon-Bold.ttf</string>
-		<string>Lamoon-Light.ttf</string>
-		<string>Lamoon-Regular.ttf</string>
+		<string>NotoSansThai-Bold.ttf</string>
+		<string>NotoSansThai-Light.ttf</string>
+		<string>NotoSansThai-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
