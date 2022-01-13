@@ -1,6 +1,6 @@
 type COLOR_TYPE = string;
 
-export const PRIMARY: COLOR_TYPE = '#1779ba';
+export const PRIMARY: COLOR_TYPE = '#12C39A';
 export const SECONDARY: COLOR_TYPE = '#767676';
 export const WHITE: COLOR_TYPE = '#FFFFFF';
 export const BLACK: COLOR_TYPE = '#000000';
