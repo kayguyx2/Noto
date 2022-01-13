@@ -9,6 +9,7 @@ export const FONT_FAMILY_BOLD: string = 'NotoSansThai-Bold';
 // FONT SIZE
 export const FONT_SIZE_24 = scaleFont(24);
 export const FONT_SIZE_20 = scaleFont(20);
+export const FONT_SIZE_18 = scaleFont(18);
 export const FONT_SIZE_16 = scaleFont(16);
 
 // LINE HEIGHT
@@ -24,10 +25,10 @@ export const FONT = StyleSheet.create({
     },
     REGULAR: {
         fontFamily: FONT_FAMILY_REGULAR,
-        fontWeight: '500',
+        fontWeight: '400',
     },
     LIGHT: {
         fontFamily: FONT_FAMILY_LIGHT,
-        fontWeight: '500',
+        fontWeight: '300',
     },
 });
