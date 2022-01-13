@@ -4,6 +4,7 @@ export const PRIMARY: COLOR_TYPE = '#12C39A';
 export const SECONDARY: COLOR_TYPE = '#767676';
 export const WHITE: COLOR_TYPE = '#FFFFFF';
 export const BLACK: COLOR_TYPE = '#000000';
+export const BACKGROUND: COLOR_TYPE = '#FFFFFF';
 
 // ACTIONS
 export const SUCCESS: COLOR_TYPE = '#3adb76';
