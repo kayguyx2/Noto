@@ -1,13 +1,13 @@
 import {Colors} from '@styles';
 import React from 'react';
-import {StatusBar, StyleSheet, SafeAreaView, ColorValue, StyleProp, ViewStyle} from 'react-native';
+import {StatusBar, StyleSheet, SafeAreaView} from 'react-native';
+import { LayoutProps } from './layout.interface';
 
-interface Props {
-    statusColor?: ColorValue;
-    footerStyles?: StyleProp<ViewStyle>;
-}
-
-const Layout: React.FC<Props> = ({statusColor = 'transparent', footerStyles = {}, children}) => {
+const Layout: React.FC<LayoutProps> = ({
+    statusColor = 'transparent',
+    footerStyles = {},
+    children,
+}) => {
     return (
         <>
             <SafeAreaView style={styles.container}>
