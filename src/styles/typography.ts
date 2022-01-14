@@ -1,4 +1,4 @@
-import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {scaleFont} from './mixins';
 
 // FONT FAMILY

@@ -1,4 +1,4 @@
-import {Colors} from '@styles';
+import {Colors} from '@styles/index';
 import React from 'react';
 import {StatusBar, StyleSheet, SafeAreaView} from 'react-native';
 import { LayoutProps } from './layout.interface';

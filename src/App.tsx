@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
-import {Colors, Typography} from '@styles';
+import {Colors, Typography} from '@styles/index';
 import Layout from '@components/Layout';
 
 import NotionImage from '@assets/images/notion.png';
@@ -26,19 +26,19 @@ const App = () => {
 
 const styles = StyleSheet.create({
     title: {
-		fontSize: Typography.FONT_SIZE_18,
-		marginBottom: 8,
+        fontSize: Typography.FONT_SIZE_18,
+        marginBottom: 8,
     },
     description: {
-		fontSize: Typography.FONT_SIZE_16,
-		color: Colors.GRAY_DARK,
-		marginBottom: 12,
+        fontSize: Typography.FONT_SIZE_16,
+        color: Colors.GRAY_DARK,
+        marginBottom: 12,
     },
     box: {
         backgroundColor: Colors.SECONDARY,
         alignItems: 'center',
-		paddingVertical: 38,
-		paddingHorizontal: 24
+        paddingVertical: 38,
+        paddingHorizontal: 24,
     },
 });
 

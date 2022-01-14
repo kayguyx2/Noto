@@ -1,4 +1,4 @@
-import {Colors, Typography} from '@styles';
+import {Colors, Typography} from '@styles/index';
 import React from 'react';
 import {
     GestureResponderEvent,
