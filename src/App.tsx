@@ -1,45 +1,32 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Colors, Typography} from '@styles/index';
-import Layout from '@components/Layout';
+import {NavigationContainer} from '@react-navigation/native';
 
-import NotionImage from '@assets/images/notion.png';
-import Button from '@components/Button';
+import TabBar from './navigation/TabBar';
+import {
+    CardStyleInterpolators,
+    createStackNavigator,
+    StackNavigationOptions,
+} from '@react-navigation/stack';
+import {View} from 'react-native';
 
-const App = () => {
-    return (
-        <Layout>
-            <View style={styles.box}>
-                <Image source={NotionImage} style={{width: 180, height: 180}} />
-                <Text style={[Typography.FONT.REGULAR, styles.title]}>
-                    Let's record it for the first time.
-                </Text>
-                <Text style={[Typography.FONT.LIGHT, styles.description]}>
-                    for the first article We recommend introducing yourself and writing what you
-                    would like to do in the future.
-                </Text>
-                <Button content="Create" />
-            </View>
-        </Layout>
-    );
+const MainAppStack = createStackNavigator();
+
+const screenOptions: StackNavigationOptions = {
+    gestureEnabled: true,
+    gestureDirection: 'horizontal',
+    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+	headerShown: false,
 };
 
-const styles = StyleSheet.create({
-    title: {
-        fontSize: Typography.FONT_SIZE_18,
-        marginBottom: 8,
-    },
-    description: {
-        fontSize: Typography.FONT_SIZE_16,
-        color: Colors.GRAY_DARK,
-        marginBottom: 12,
-    },
-    box: {
-        backgroundColor: Colors.SECONDARY,
-        alignItems: 'center',
-        paddingVertical: 38,
-        paddingHorizontal: 24,
-    },
-});
+const App = () => {
+    const {Navigator, Screen} = MainAppStack;
+    return (
+        <NavigationContainer>
+            <Navigator initialRouteName="main" screenOptions={screenOptions}>
+                <Screen name="main" component={TabBar} />
+            </Navigator>
+        </NavigationContainer>
+    );
+};
 
 export default App;
