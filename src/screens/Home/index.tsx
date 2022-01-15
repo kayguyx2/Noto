@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
         marginBottom: 12,
 	},
 	container: {
-		backgroundColor: Colors.SECONDARY,
+		flex: 1
 	},
 	box: {
-        alignItems: 'center',
+		alignItems: 'center',
+		backgroundColor: Colors.SECONDARY,
 		justifyContent: 'center',
         paddingVertical: 38,
         paddingHorizontal: 24,
