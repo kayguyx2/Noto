@@ -6,6 +6,9 @@ export const WHITE: COLOR_TYPE = '#FFFFFF';
 export const BLACK: COLOR_TYPE = '#000000';
 export const BACKGROUND: COLOR_TYPE = '#FFFFFF';
 
+// TEXT
+export const TEXT_BASE: COLOR_TYPE = '#222222'
+
 // ACTIONS
 export const SUCCESS: COLOR_TYPE = '#3adb76';
 export const WARNING: COLOR_TYPE = '#ffae00';

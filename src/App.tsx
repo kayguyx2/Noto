@@ -3,14 +3,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import TabBar from './navigation/TabBar';
+import EditorScreen from './screens/Editor';
+
 import {
     CardStyleInterpolators,
     createStackNavigator,
     StackNavigationOptions,
 } from '@react-navigation/stack';
 import {store, persistor} from '@/store';
-const MainAppStack = createStackNavigator();
 
+
+
+export type RootStackParamList = {
+	main: undefined;
+	editor: undefined;
+};
+
+const MainAppStack = createStackNavigator();
 const screenOptions: StackNavigationOptions = {
     gestureEnabled: true,
     gestureDirection: 'horizontal',
@@ -26,6 +35,7 @@ const App = () => {
                 <NavigationContainer>
                     <Navigator initialRouteName="main" screenOptions={screenOptions}>
                         <Screen name="main" component={TabBar} />
+                        <Screen name="editor" component={EditorScreen} />
                     </Navigator>
                 </NavigationContainer>
             </PersistGate>

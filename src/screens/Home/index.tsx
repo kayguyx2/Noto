@@ -1,10 +1,15 @@
 import Button from '@/components/Button';
 import Layout from '@/components/Layout';
 import {Typography, Colors} from '@/styles';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
 const HomeScreen = () => {
+	const navigation = useNavigation()
+	const onCreateEditor = () => {
+		navigation.navigate('editor')
+	}
     return (
         <Layout>
             <View style={styles.container}>
@@ -20,7 +25,7 @@ const HomeScreen = () => {
                         for the first article We recommend introducing yourself and
                         writing what you would like to do in the future.
                     </Text>
-                    <Button content="Create" />
+                    <Button content="Create" onPress={() => onCreateEditor()}/>
                 </View>
             </View>
         </Layout>

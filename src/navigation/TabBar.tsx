@@ -16,11 +16,11 @@ const TabBarScreen = () => {
     const {Navigator, Screen} = MainTabBar;
     return (
         <Navigator
-            initialRouteName="home"
+            initialRouteName="note"
             tabBar={props => <TabBottomBar {...props} />}>
-            <Screen name="home" component={HomeScreen} />
+            <Screen name="note" component={HomeScreen} />
             <Screen name="favorite" component={FavoriteScreen} />
-            <Screen name="setting" component={SettingScreen} />
+            <Screen name="archive" component={SettingScreen} />
         </Navigator>
     );
 };

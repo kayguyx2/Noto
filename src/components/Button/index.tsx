@@ -3,14 +3,14 @@ import React from 'react';
 import {GestureResponderEvent, Text, TouchableOpacity, View} from 'react-native';
 
 interface ButtonProps {
-    content: string;
+    content?: string;
     color?: string;
     onPress?: (event: GestureResponderEvent) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({content, color = Colors.PRIMARY}) => {
+const Button: React.FC<ButtonProps> = ({content, onPress, color = Colors.PRIMARY}) => {
     return (
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onPress}>
             <View
                 style={{
                     backgroundColor: color,
