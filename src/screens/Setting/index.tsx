@@ -1,6 +1,6 @@
-import Layout from '@components/Layout';
-import React from 'react'
-import { View, Text } from 'react-native';
+import Layout from '@/components/Layout';
+import React from 'react';
+import {Text} from 'react-native';
 
 const SettingScreen = () => {
     return (

@@ -1,3 +1,4 @@
+import {Colors, Typography} from '@/styles';
 import {BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {
     NavigationHelpers,
@@ -5,7 +6,6 @@ import {
     RouteProp,
     TabNavigationState,
 } from '@react-navigation/native';
-import {Colors, Typography} from '@styles/index';
 import * as React from 'react';
 
 import {

@@ -1,4 +1,4 @@
-import { ColorValue, StyleProp, ViewStyle } from "react-native";
+import {ColorValue, StyleProp, ViewStyle} from 'react-native';
 
 export interface LayoutProps {
     statusColor?: ColorValue;

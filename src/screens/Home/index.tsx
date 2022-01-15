@@ -1,7 +1,6 @@
-import Button from '@components/Button';
-import Layout from '@components/Layout';
-import {Colors} from '@styles/index';
-import {Typography} from '@styles/index';
+import Button from '@/components/Button';
+import Layout from '@/components/Layout';
+import { Typography, Colors } from '@/styles';
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
@@ -10,7 +9,7 @@ const HomeScreen = () => {
         <Layout>
             <View style={styles.box}>
                 <Image
-                    source={require('@assets/images/notion.png')}
+                    source={require('@/assets/images/notion.png')}
                     style={{width: 180, height: 180}}
                 />
                 <Text style={[Typography.FONT.REGULAR, styles.title]}>

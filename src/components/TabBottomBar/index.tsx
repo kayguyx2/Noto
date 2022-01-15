@@ -6,7 +6,7 @@ import {Path, Svg} from 'react-native-svg';
 import React from 'react';
 import StaticTabBar from './StaticTabBar';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import { Colors } from '@styles/index';
+import {Colors} from '@/styles';
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 const {width} = Dimensions.get('window');
@@ -54,7 +54,10 @@ const TabBottomBar = (props: BottomTabBarProps) => {
     return (
         <>
             <View {...{height, width}}>
-                <AnimatedSvg width={width * 2} {...{height}} style={{transform: [{translateX}]}}>
+                <AnimatedSvg
+                    width={width * 2}
+                    {...{height}}
+                    style={{transform: [{translateX}]}}>
                     <Path fill={backgroundColor} {...{d}} />
                 </AnimatedSvg>
                 <View style={StyleSheet.absoluteFill}>
