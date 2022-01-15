@@ -40,9 +40,6 @@ export default class StaticTabBar extends React.PureComponent<StaticTabBarProps>
         });
     }
 
-    // (_, index: number) => {
-    // 	return new Animated.Value(index === 1 ? 1 : 0)
-    // },
     getNameIcon = (routeName: string) => {
         switch (routeName) {
             case 'home':
