@@ -17,7 +17,6 @@ const TabBarScreen = () => {
     return (
         <Navigator
             initialRouteName="home"
-            screenOptions={{headerShown: false}}
             tabBar={props => <TabBottomBar {...props} />}>
             <Screen name="home" component={HomeScreen} />
             <Screen name="favorite" component={FavoriteScreen} />
