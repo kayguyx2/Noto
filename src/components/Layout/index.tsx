@@ -5,7 +5,7 @@ import {LayoutProps} from './layout.interface';
 
 const Layout: React.FC<LayoutProps> = ({statusColor = 'transparent', children}) => {
     return (
-		<Fragment>
+        <Fragment>
             <StatusBar
                 translucent
                 backgroundColor={statusColor}
@@ -23,7 +23,14 @@ const styles = StyleSheet.create({
     layout: {
         flex: 1,
         backgroundColor: Colors.BACKGROUND,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        ...Platform.select({
+            ios: {
+                paddingTop: 0,
+            },
+            android: {
+                paddingTop: StatusBar.currentHeight,
+            },
+        }),
     },
     container: {
         flex: 1,
