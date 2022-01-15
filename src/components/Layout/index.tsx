@@ -1,45 +1,36 @@
 import {Colors} from '@styles/index';
 import React, {Fragment} from 'react';
-import {StatusBar, StyleSheet, SafeAreaView, View} from 'react-native';
+import {StatusBar, StyleSheet, SafeAreaView, View, Platform} from 'react-native';
 import {LayoutProps} from './layout.interface';
 
-const Layout: React.FC<LayoutProps> = ({
-    statusColor = 'transparent',
-    footerStyles = {},
-    children,
-}) => {
+const Layout: React.FC<LayoutProps> = ({statusColor = 'transparent', children}) => {
     return (
-        <Fragment>
-            <View
-                style={{
-                    flex: 1,
-                    backgroundColor: 'red',
-                }}>
-                <StatusBar
-                    translucent
-                    backgroundColor={statusColor}
-                    barStyle="dark-content"
-                />
-                <SafeAreaView style={styles.header} />
-                <SafeAreaView style={styles.layout}>
-                    <View style={styles.container}>{children}</View>
-                </SafeAreaView>
-            </View>
+		<Fragment>
+            <StatusBar
+                translucent
+                backgroundColor={statusColor}
+                barStyle="dark-content"
+            />
+            <SafeAreaView style={styles.layout}>
+                <View style={styles.container}>{children}</View>
+            </SafeAreaView>
+            <SafeAreaView style={styles.footer} />
         </Fragment>
     );
 };
 
 const styles = StyleSheet.create({
-    header: {
-        flex: 0,
+    layout: {
+        flex: 1,
         backgroundColor: Colors.BACKGROUND,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     container: {
         flex: 1,
         backgroundColor: Colors.BACKGROUND,
     },
-    layout: {
-        flex: 1,
+    footer: {
+        flex: 0,
         backgroundColor: Colors.PRIMARY,
     },
 });

@@ -1,12 +1,9 @@
 import {BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import {
     NavigationHelpers,
-    NavigationProp,
     ParamListBase,
-    Route,
     RouteProp,
     TabNavigationState,
-    useNavigation,
 } from '@react-navigation/native';
 import {Colors, Typography} from '@styles/index';
 import * as React from 'react';
@@ -20,14 +17,6 @@ import {
     Text,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
-// svg
-// import HealthIcon from '../../assets/icons/generally/health.svg';
-// import AccountIcon from '../../assets/icons/generally/user.svg';
-// import TrackIcon from '../../assets/icons/generally/track.svg';
-// import ActiveHealthIcon from '../../assets/icons/generally/active-health.svg';
-// import ActiveAccountIcon from '../../assets/icons/generally/active-user.svg';
-// import ActiveTrackIcon from '../../assets/icons/generally/active-track.svg';
 
 // Language
 
@@ -60,7 +49,7 @@ export default class StaticTabBar extends React.PureComponent<StaticTabBarProps>
             case 'setting':
                 return 'file-text';
             default:
-                return '';
+                return 'box`';
         }
     };
 
@@ -213,12 +202,12 @@ const styles = StyleSheet.create({
     },
     textActiveInTab: {
         color: Colors.WHITE,
-		paddingTop: 5,
-		fontSize: Typography.FONT_SIZE_16
+        paddingTop: 5,
+        fontSize: Typography.FONT_SIZE_16,
     },
     textDeactiveInTab: {
         paddingTop: 5,
-		color: Colors.WHITE,
-		fontSize: Typography.FONT_SIZE_16
+        color: Colors.WHITE,
+        fontSize: Typography.FONT_SIZE_16,
     },
 });
