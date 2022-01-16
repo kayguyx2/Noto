@@ -1,5 +1,6 @@
 import { scaleSize } from "./mixins";
 
+export const SCALE_30 = scaleSize(30);
 export const SCALE_24 = scaleSize(24);
 export const SCALE_20 = scaleSize(20);
 export const SCALE_18 = scaleSize(18);

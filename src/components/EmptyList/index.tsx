@@ -8,7 +8,12 @@ import Layout from '../Layout';
 const EmptyList = () => {
     const navigation = useNavigation();
     const onCreateEditor = () => {
-        navigation.navigate('editor', {noteId: '', status: 'new'});
+        navigation.navigate('editor', {
+            status: 'new',
+            noteId: '',
+            title: '',
+            body: '',
+        });
     };
     return (
         <Layout>

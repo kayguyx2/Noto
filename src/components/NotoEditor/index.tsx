@@ -9,37 +9,38 @@ import {
     ScrollView,
     View,
     StyleSheet,
-    Pressable,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
-import Button from '../Button';
-import Icon from 'react-native-vector-icons/Feather';
 import {actionNote} from '@/store/actions';
 import {connect} from 'react-redux';
-import {IStoreState, IUpdateNoteBody, IUpdateNoteId, IUpdateNoteTitle} from '@/store/types';
-import { onGenerateId } from '@/utils/generate';
+import {
+    INote,
+    IStoreState,
+    IUpdateNoteBody,
+    IUpdateNoteId,
+    IUpdateNoteTitle,
+} from '@/store/types';
+import {onGenerateId} from '@/utils/generate';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {RootStackParamList} from '@/App';
 
 interface NotoEditorProps {
-	noteId: string;
-	title: string;
-	body: string;
-	onUpdateNoteId: (id: string | number[]) => IUpdateNoteId;
+    noteId: string;
+    title: string;
+    body: string;
+    onUpdateNoteId: (id: string | number[]) => IUpdateNoteId;
     onUpdateNoteTitle: (title: string) => IUpdateNoteTitle;
-	onUpdateNoteBody: (body: string) => IUpdateNoteBody;
+    onUpdateNoteBody: (body: string) => IUpdateNoteBody;
 }
 
 const NotoEditor: FunctionComponent<NotoEditorProps> = ({
-	noteId,
-	title,
-	body,
-	onUpdateNoteId,
+    title,
+    onUpdateNoteId,
     onUpdateNoteTitle,
     onUpdateNoteBody,
 }) => {
-    const [isFavorite, setIsFavorite] = useState<boolean>(false);
-    const [isArchive, setIsArchive] = useState<boolean>(false);
-
+    const route = useRoute<RouteProp<RootStackParamList, 'editor'>>();
     const richText = React.useRef<RichEditor>();
     const scrollRef = React.useRef<ScrollView>();
 
@@ -55,12 +56,23 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
         onUpdateNoteTitle(event);
     };
 
-	useEffect(() => {
-		if (!noteId) {
-			const newId = onGenerateId();
-			onUpdateNoteId(newId);
-		}
-	},[])
+    useEffect(() => {
+        if (route.params.status === 'new') {
+            const newId = onGenerateId();
+            onUpdateNoteId(newId);
+        }
+
+        if (route.params.status === 'edit') {
+            const noteId = route.params.noteId;
+            const noteTitle = route.params.title;
+            const noteBody = route.params.body;
+
+            onUpdateNoteId(noteId);
+            onUpdateNoteTitle(noteTitle);
+            onUpdateNoteBody(noteBody);
+        }
+    }, []);
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView
@@ -77,26 +89,6 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
                                 {moment().format('DD MMM YYYY')}
                             </Text>
                         </View>
-                        {/* <View style={styles.favoriteIconLayout}>
-                            <Pressable
-                                style={{marginHorizontal: 5}}
-                                onPress={() => setIsFavorite(favorite => !favorite)}>
-                                <Icon
-                                    name="heart"
-                                    color={isFavorite ? Colors.PRIMARY : Colors.TEXT_BASE}
-                                    size={28}
-                                />
-                            </Pressable>
-                            <Pressable
-                                style={{marginHorizontal: 5}}
-                                onPress={() => setIsArchive(archive => !archive)}>
-                                <Icon
-                                    name="archive"
-                                    color={isArchive ? Colors.PRIMARY : Colors.TEXT_BASE}
-                                    size={28}
-                                />
-                            </Pressable>
-                        </View> */}
                     </View>
                     <TextInput
                         value={title}
@@ -112,13 +104,13 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
                     <RichEditor
                         ref={richText}
                         style={{flex: 1}}
-						onChange={body => onUpdateNoteBody(body)}
+                        onChange={body => onUpdateNoteBody(body)}
                         placeholder="No addition text..."
                         disabled={false}
                         useContainer={true}
                         onCursorPosition={onCursorPosition}
-						pasteAsPlainText={true}
-						initialContentHTML={body}
+                        pasteAsPlainText={true}
+                        initialContentHTML={route.params.body}
                         editorStyle={{
                             color: Colors.TEXT_BASE,
                             contentCSSText: `
@@ -207,21 +199,22 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({noteState}: IStoreState) => {
+const mapStateToProps = ({noteState, listsState}: IStoreState) => {
+    const noteId = noteState.id;
     const title = noteState.title;
-	const body = noteState.body;
-	const noteId = noteState.id;
-	return {
-		noteId,
-		title,
-		body
+    const body = noteState.body;
+
+    return {
+        noteId,
+        body,
+        title,
     };
 };
 
 const mapActionToProps = {
-	onUpdateNoteId: actionNote.updateNoteId,
+    onUpdateNoteId: actionNote.updateNoteId,
     onUpdateNoteTitle: actionNote.updateNoteTitle,
-	onUpdateNoteBody: actionNote.updateNoteBody,
+    onUpdateNoteBody: actionNote.updateNoteBody,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(NotoEditor);

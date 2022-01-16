@@ -2,7 +2,9 @@ export type AppRootParamList = {
     main: undefined;
 	editor: {
 		noteId: string,
-		status: string
+		status: string,
+		title: string,
+		body: string
 	};
 };
 

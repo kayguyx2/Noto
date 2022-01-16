@@ -1,10 +1,16 @@
+import {RootStackParamList} from '@/App';
 import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
 import {INote, IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
 import {AppRootParamList} from '@/types/navigation';
 import {validateCanSubmitCreateNote} from '@/utils/validate';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {
+    NavigationProp,
+    RouteProp,
+    useNavigation,
+    useRoute,
+} from '@react-navigation/native';
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
@@ -28,6 +34,8 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
     onCreateNewNote,
     onResetNote,
 }) => {
+    const route = useRoute<RouteProp<RootStackParamList, 'editor'>>();
+    const statusEditor = route.params.status;
     const navigation = useNavigation();
     const canSubmitNote = validateCanSubmitCreateNote(note);
 
@@ -52,7 +60,11 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
                         onPress={() => {}}
                         containerStyles={{marginRight: 10}}
                     />
-                    <Button content="Save" disabled={!canSubmitNote} onPress={onSubmit} />
+                    <Button
+                        content={statusEditor === 'new' ? 'save' : 'edit'}
+                        disabled={!canSubmitNote}
+                        onPress={onSubmit}
+                    />
                 </View>
             </View>
             <View style={styles.footerHeader}>

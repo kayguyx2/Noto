@@ -3,15 +3,14 @@ import {Dispatch} from 'redux';
 import {actionList, actionNote, StoreActionTypes} from '@/store/actions';
 import {NavigationProp} from '@react-navigation/native';
 import {AppRootParamList} from '@/types/navigation';
-import {removeNoteById} from '@/utils/core';
+import {insertOrUpdateNote, removeNoteById} from '@/utils/core';
 
 export const createNote =
     (navigation: NavigationProp<AppRootParamList>): AppThunk =>
     async (dispatch: Dispatch<StoreActionTypes>, getState: () => IStoreState) => {
         try {
             const {noteState, listsState} = getState();
-            const oldLists = listsState.lists;
-            const newList = [...oldLists, noteState];
+            const newList = insertOrUpdateNote(listsState.lists, noteState, noteState.id);
             dispatch(actionList.updateNoteList(newList));
             dispatch(actionNote.resetNote());
             navigation.navigate('main');

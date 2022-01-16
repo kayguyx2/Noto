@@ -47,8 +47,10 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
 
         const onOpenEditNote = () => {
             navigation.navigate('editor', {
-                noteId: item.id,
                 status: 'edit',
+                noteId: item.id,
+                title: item.title,
+                body: item.body,
             });
         };
 
@@ -59,6 +61,17 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
                 }
                 onSwipeableOpen={() => closeRow(index)}
                 ref={ref => (row[index] = ref)}>
+                <ButtonIcon
+                    name="heart"
+                    color={Colors.TEXT_BASE}
+                    onPress={() => Alert.alert('xxx')}
+                    containerStyles={{
+                        zIndex: 101,
+                        position: 'absolute',
+                        right: Spacing.SCALE_30,
+                        top: Spacing.SCALE_16,
+                    }}
+                />
                 <TouchableWithoutFeedback onPress={onOpenEditNote}>
                     <View
                         style={[
@@ -80,7 +93,6 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
                             <Text style={styles.dateTimeStyle}>
                                 {moment(item.updated_at).format('MM ddd YYYY')}
                             </Text>
-                            <ButtonIcon color={Colors.TEXT_BASE} name="heart" size={20} />
                         </View>
                         <View
                             style={{
@@ -134,6 +146,7 @@ const styles = StyleSheet.create({
         paddingTop: Spacing.SCALE_6,
     },
     cardContainerStyle: {
+        ...boxShadow(Colors.BLACK_OPACITY_25),
         marginHorizontal: Spacing.SCALE_18,
         marginVertical: Spacing.SCALE_6,
         borderColor: Colors.GREEN,
@@ -142,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: Spacing.SCALE_8,
         height: 100,
-        ...boxShadow(Colors.BLACK_OPACITY_25),
+        zIndex: 100,
     },
     cardMenuStyle: {
         flexDirection: 'row',
@@ -182,13 +195,14 @@ const styles = StyleSheet.create({
         fontSize: Typography.FONT_SIZE_20,
         fontFamily: Typography.FONT_FAMILY_BOLD,
         height: '100%',
+        width: 250,
     },
     descriptionStyle: {
         color: Colors.GRAY_DARK,
         fontSize: Typography.FONT_SIZE_14,
         fontFamily: Typography.FONT_FAMILY_REGULAR,
         marginBottom: Spacing.SCALE_6,
-        width: 200,
+        width: 230,
     },
 });
 

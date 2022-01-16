@@ -16,10 +16,15 @@ import {store, persistor} from '@/store';
 
 export type RootStackParamList = {
 	main: undefined;
-	editor: undefined;
+	editor: {
+		noteId: string,
+		status: string,
+		title: string,
+		body: string
+	};
 };
 
-const MainAppStack = createStackNavigator();
+const MainAppStack = createStackNavigator<RootStackParamList>();
 const screenOptions: StackNavigationOptions = {
     gestureEnabled: true,
     gestureDirection: 'horizontal',
