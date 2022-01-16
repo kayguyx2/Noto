@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import {scaleFont} from './mixins';
 
 // FONT FAMILY
-export const FONT_FAMILY_LIGHT: string = 'NotoSansThai-LIGHT';
-export const FONT_FAMILY_REGULAR: string = 'NotoSansThai-REGULAR';
+export const FONT_FAMILY_LIGHT: string = 'NotoSansThai-Light';
+export const FONT_FAMILY_REGULAR: string = 'NotoSansThai-Regular';
 export const FONT_FAMILY_BOLD: string = 'NotoSansThai-Bold';
 
 // FONT SIZE

@@ -2,14 +2,23 @@ import Button from '@/components/Button';
 import Layout from '@/components/Layout';
 import {Typography, Colors} from '@/styles';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
 	const navigation = useNavigation()
 	const onCreateEditor = () => {
 		navigation.navigate('editor')
 	}
+
+	useEffect(() => {
+		const getData = async () => {
+			const data = await AsyncStorage.getAllKeys()
+			console.log('data', data)
+		}
+		getData()
+	}, [])
     return (
         <Layout>
             <View style={styles.container}>

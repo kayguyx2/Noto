@@ -8,7 +8,6 @@ const randomUserTransform = createTransform(
             inboundStateClone.randomUser = {};
             return inboundStateClone;
         }
-
         return inboundState;
     },
 );

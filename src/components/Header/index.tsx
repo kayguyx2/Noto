@@ -1,6 +1,10 @@
 import {Colors} from '@/styles';
-import React, {Fragment, FunctionComponent} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
+
+import Button from '../Button';
+import ButtonIcon from '../ButtonIcon';
 
 interface HeaderProps {}
 
@@ -10,10 +14,26 @@ const FOOTER_HEIGHT = 30;
 const HEIGHT = CONTENT_HEIGHT + FOOTER_HEIGHT;
 
 const Header: FunctionComponent<HeaderProps> = ({}) => {
+    const navigation = useNavigation();
+
+    const onGoBack = () => {
+        navigation.goBack();
+    };
     return (
         <View style={styles.header}>
-			<View style={styles.contentHeader}>
-			</View>
+            <View style={styles.contentHeader}>
+                <View style={styles.backIconLayout}>
+                    <ButtonIcon name="arrow-left" onPress={onGoBack} />
+                </View>
+                <View style={styles.menuBar}>
+                    <ButtonIcon
+                        name="heart"
+                        onPress={() => {}}
+                        containerStyles={{marginRight: 10}}
+                    />
+                    <Button content="Save" />
+                </View>
+            </View>
             <View style={styles.footerHeader}>
                 <View style={styles.footerHeaderGrid} />
                 <View style={styles.footerHeaderRadius} />
@@ -28,9 +48,15 @@ const styles = StyleSheet.create({
     },
     contentHeader: {
         height: CONTENT_HEIGHT,
-        backgroundColor: Colors.PRIMARY,
+        backgroundColor: Colors.HEADER,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 18,
+    },
+    backIconLayout: {},
+    menuBar: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
     footerHeader: {
@@ -39,7 +65,7 @@ const styles = StyleSheet.create({
     },
     footerHeaderGrid: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: Colors.PRIMARY,
+        backgroundColor: Colors.HEADER,
     },
     footerHeaderRadius: {
         flex: 1,

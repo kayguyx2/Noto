@@ -1,4 +1,4 @@
-import {Colors, Typography} from '@/styles';
+import {Colors, Spacing, Typography} from '@/styles';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {
@@ -36,6 +36,8 @@ const NotoEditor = () => {
         setTitle(event);
     };
 
+    console.log('Spacing.SCALE_12', Spacing.SCALE_12);
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView
@@ -52,7 +54,7 @@ const NotoEditor = () => {
                                 {moment().format('DD MMM YYYY')}
                             </Text>
                         </View>
-                        <View style={styles.favoriteIconLayout}>
+                        {/* <View style={styles.favoriteIconLayout}>
                             <Pressable
                                 style={{marginHorizontal: 5}}
                                 onPress={() => setIsFavorite(favorite => !favorite)}>
@@ -71,7 +73,7 @@ const NotoEditor = () => {
                                     size={28}
                                 />
                             </Pressable>
-                        </View>
+                        </View> */}
                     </View>
                     <TextInput
                         value={title}
@@ -86,7 +88,7 @@ const NotoEditor = () => {
                     />
                     <RichEditor
                         ref={richText}
-                        style={{flex: 1, marginBottom: 10}}
+						style={{ flex: 1 }}
                         onChange={descriptionText => {}}
                         placeholder="No addition text..."
                         disabled={false}
@@ -94,17 +96,19 @@ const NotoEditor = () => {
                         onCursorPosition={onCursorPosition}
                         pasteAsPlainText={true}
                         editorStyle={{
-                            color: Colors.TEXT_BASE,
+							color: Colors.TEXT_BASE,
                             contentCSSText: `
 								font-family: sans-serif; 
-								font-size: 18px; 
-								padding: 0 10px; 
+								font-size: 18px;
+								padding: 5px ${Spacing.SCALE_18}px; 
 								display: flex; 
 								flex-direction: column; 
 								min-height: 200px;
+								line-height: 24px;
 							`,
                         }}
-                    />
+					/>
+					<View style={{height: 10}} />
                 </KeyboardAvoidingView>
             </ScrollView>
             <View
@@ -156,10 +160,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginVertical: 10,
         alignItems: 'center',
+        paddingHorizontal: Spacing.SCALE_18,
     },
-    dateTimeEditor: {
-        marginLeft: 10,
-    },
+    dateTimeEditor: {},
     favoriteIconLayout: {
         marginRight: 20,
         flexDirection: 'row',
@@ -174,8 +177,8 @@ const styles = StyleSheet.create({
         fontSize: Typography.FONT_SIZE_24,
         fontFamily: Typography.FONT_FAMILY_BOLD,
         fontWeight: '700',
-        marginHorizontal: 10,
-        marginBottom: 10,
+        marginHorizontal: Spacing.SCALE_18,
+        marginBottom: Spacing.SCALE_10,
         color: Colors.TEXT_BASE,
     },
 });

@@ -6,7 +6,7 @@ import React from 'react';
 
 const EditorScreen = () => {
     return (
-		<Layout headerColor={Colors.PRIMARY}>
+		<Layout headerColor={Colors.HEADER}>
 			<Header />
             <NotoEditor />
         </Layout>

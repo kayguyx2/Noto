@@ -5,6 +5,7 @@ export const SECONDARY: COLOR_TYPE = '#F6F9F9';
 export const WHITE: COLOR_TYPE = '#FFFFFF';
 export const BLACK: COLOR_TYPE = '#000000';
 export const BACKGROUND: COLOR_TYPE = '#FFFFFF';
+export const HEADER: COLOR_TYPE = '#c8dbdb';
 
 // TEXT
 export const TEXT_BASE: COLOR_TYPE = '#222222'
