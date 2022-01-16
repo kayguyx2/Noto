@@ -13,7 +13,8 @@ import ButtonIcon from '../ButtonIcon';
 
 interface HeaderEditorProps {
     note: INote;
-    onCreateNewNote: () => void;
+	onCreateNewNote: () => void;
+	onResetNote: () => void;
 }
 
 const RADIUS = 30;
@@ -21,12 +22,13 @@ const CONTENT_HEIGHT = 60;
 const FOOTER_HEIGHT = 30;
 const HEIGHT = CONTENT_HEIGHT + FOOTER_HEIGHT;
 
-const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({note, onCreateNewNote}) => {
+const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({note, onCreateNewNote, onResetNote}) => {
     const navigation = useNavigation();
     const canSubmitNote = validateCanSubmitCreateNote(note);
 
     const onGoBack = () => {
-        navigation.goBack();
+		navigation.goBack();
+		onResetNote()
     };
 
     const onSubmit = () => {
@@ -97,7 +99,8 @@ const mapStateToProps = ({noteState}: IStoreState) => {
 };
 
 const mapActionToProps = {
-    onCreateNewNote: thunkLists.createNote,
+	onCreateNewNote: thunkLists.createNote,
+	onResetNote: actionNote.resetNote
 };
 
 export default connect(mapStateToProps, mapActionToProps)(HeaderEditor);
