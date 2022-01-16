@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // screen
 import HomeScreen from '@/screens/Home';
 import FavoriteScreen from '@/screens/Favorite';
-import SettingScreen from '@/screens/Setting';
+import AchieveScreen from '@/screens/Achieve';
 
 // component
 import TabBottomBar from '@/components/TabBottomBar';
@@ -15,12 +15,10 @@ const MainTabBar = createBottomTabNavigator();
 const TabBarScreen = () => {
     const {Navigator, Screen} = MainTabBar;
     return (
-        <Navigator
-            initialRouteName="note"
-            tabBar={props => <TabBottomBar {...props} />}>
+        <Navigator initialRouteName="note" tabBar={props => <TabBottomBar {...props} />}>
             <Screen name="note" component={HomeScreen} />
             <Screen name="favorite" component={FavoriteScreen} />
-            <Screen name="archive" component={SettingScreen} />
+            <Screen name="archive" component={AchieveScreen} />
         </Navigator>
     );
 };

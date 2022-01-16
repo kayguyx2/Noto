@@ -1,24 +1,38 @@
+import {actionNote} from '@/store/actions';
+import {thunkLists} from '@/store/middlewares/thunks';
+import {INote, IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
+import {validateCanSubmitCreateNote} from '@/utils/validate';
 import {useNavigation} from '@react-navigation/native';
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
 
 import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';
 
-interface HeaderProps {}
+interface HeaderEditorProps {
+    note: INote;
+    onCreateNewNote: () => void;
+}
 
 const RADIUS = 30;
 const CONTENT_HEIGHT = 60;
 const FOOTER_HEIGHT = 30;
 const HEIGHT = CONTENT_HEIGHT + FOOTER_HEIGHT;
 
-const Header: FunctionComponent<HeaderProps> = ({}) => {
+const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({note, onCreateNewNote}) => {
     const navigation = useNavigation();
+    const canSubmitNote = validateCanSubmitCreateNote(note);
 
     const onGoBack = () => {
         navigation.goBack();
     };
+
+    const onSubmit = () => {
+        onCreateNewNote();
+    };
+
     return (
         <View style={styles.header}>
             <View style={styles.contentHeader}>
@@ -31,7 +45,7 @@ const Header: FunctionComponent<HeaderProps> = ({}) => {
                         onPress={() => {}}
                         containerStyles={{marginRight: 10}}
                     />
-                    <Button content="Save" />
+                    <Button content="Save" disabled={!canSubmitNote} onPress={onSubmit} />
                 </View>
             </View>
             <View style={styles.footerHeader}>
@@ -75,4 +89,15 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Header;
+const mapStateToProps = ({noteState}: IStoreState) => {
+    const note = noteState;
+    return {
+        note,
+    };
+};
+
+const mapActionToProps = {
+    onCreateNewNote: thunkLists.createNote,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(HeaderEditor);

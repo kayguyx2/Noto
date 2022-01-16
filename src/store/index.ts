@@ -4,13 +4,11 @@ import {persistStore, persistReducer} from 'redux-persist';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import rootReducer from '@/store/reducers';
-import {randomUserTransform} from '@/store/transforms';
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['subscriptionState'], // not persist subscriptionState (value will be reset when app restarts)
-    transforms: [randomUserTransform], // ignore field 'randomUser' in 'userState' (Explain: to not persist a nested field, we use transform)
+    blacklist: [],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,67 +1,63 @@
 import {ThunkAction} from 'redux-thunk';
 import {StoreActionTypes} from '@/store/actions';
-
-export interface IUser {
-    name: string;
-    age: number;
-}
-
-export interface ISubscription {
-    name: string;
-    price: number;
-}
+import {LISTS_TYPE, NOTE_TYPE} from '../constants/actionTypes';
 
 export interface INote {
     id: string;
     title: string;
     body: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at: string;
+    updated_at: string;
     is_favorite: boolean;
     is_archived: boolean;
+}
+
+export interface ILists {
+	lists: INote[];
+	test: number
 }
 
 // =================
 // STORE STATE
 // =================
-
-export interface IUSerState {
-    user: IUser;
-    randomUser: any;
-}
-
 export interface IStoreState {
-    userState: IUSerState;
-    subscriptionState: ISubscription;
     noteState: INote;
+    listsState: ILists;
 }
 
-export type IStoreStateTypes = IUSerState & ISubscription & INote;
+export type IStoreStateTypes = INote & ILists;
 
 // =================
 // ACTIONS
 // =================
-export interface IUpdateUserName {
-    type: string;
-    payload: string;
+export interface ICreateNote {
+    type: NOTE_TYPE.CREATE_NEW_NOTE;
+    payload: INote;
 }
-
-export interface IUpdateRandomUser {
-    type: string;
-    payload: any;
+export interface IUpdateNoteId {
+    type: NOTE_TYPE.UPDATE_NOTE_ID;
+    payload: string | number[];
 }
-export interface IUpdateSubscriptionName {
-    type: string;
-    payload: string;
-}
-
 export interface IUpdateNoteTitle {
-    type: string;
+    type: NOTE_TYPE.UPDATE_NOTE_TITLE;
     payload: string;
 }
 export interface IUpdateNoteBody {
-    type: string;
+    type: NOTE_TYPE.UPDATE_NOTE_BODY;
     payload: string;
+}
+export interface IResetNote {
+    type: NOTE_TYPE.RESET_NOTE;
+    payload: null;
+}
+
+export interface IAddNote {
+    type: LISTS_TYPE.ADD_NOTE;
+    payload: INote[];
+}
+export interface ITest {
+    type: LISTS_TYPE.TEST;
+    payload: number;
 }
 
 // =================

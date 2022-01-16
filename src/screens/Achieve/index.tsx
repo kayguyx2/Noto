@@ -1,10 +1,10 @@
 import EmptyList from '@/components/EmptyList';
 import React from 'react';
 
-const FavoriteScreen = () => {
+const AchieveScreen = () => {
     return (
-		<EmptyList />
+        <EmptyList />
     );
 };
 
-export default FavoriteScreen;
+export default AchieveScreen;

@@ -1,13 +1,10 @@
-import {userState} from './reducerUser';
 import {noteState} from './reducerNote';
-import {subscriptionState} from './reducerSubscription';
+import {listsState} from './reducerLists';
 import {combineReducers} from 'redux';
-import {IStoreState} from '../types';
 
-const rootReducer = combineReducers<IStoreState>({
-    userState,
-	subscriptionState,
-	noteState
+const rootReducer = combineReducers({
+    listsState,
+    noteState,
 });
 
 export default rootReducer;

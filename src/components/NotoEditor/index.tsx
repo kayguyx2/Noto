@@ -1,6 +1,6 @@
 import {Colors, Spacing, Typography} from '@/styles';
 import moment from 'moment';
-import React, {useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {
     Text,
     Platform,
@@ -15,9 +15,28 @@ import {TextInput} from 'react-native-gesture-handler';
 import {actions, RichEditor, RichToolbar} from 'react-native-pell-rich-editor';
 import Button from '../Button';
 import Icon from 'react-native-vector-icons/Feather';
+import {actionNote} from '@/store/actions';
+import {connect} from 'react-redux';
+import {IStoreState, IUpdateNoteBody, IUpdateNoteId, IUpdateNoteTitle} from '@/store/types';
+import { onGenerateId } from '@/utils/generate';
 
-const NotoEditor = () => {
-    const [title, setTitle] = useState<string>('');
+interface NotoEditorProps {
+	noteId: string;
+	title: string;
+	body: string;
+	onUpdateNoteId: (id: string | number[]) => IUpdateNoteId;
+    onUpdateNoteTitle: (title: string) => IUpdateNoteTitle;
+	onUpdateNoteBody: (body: string) => IUpdateNoteBody;
+}
+
+const NotoEditor: FunctionComponent<NotoEditorProps> = ({
+	noteId,
+	title,
+	body,
+	onUpdateNoteId,
+    onUpdateNoteTitle,
+    onUpdateNoteBody,
+}) => {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
     const [isArchive, setIsArchive] = useState<boolean>(false);
 
@@ -33,11 +52,15 @@ const NotoEditor = () => {
     };
 
     const handleTitleChange = event => {
-        setTitle(event);
+        onUpdateNoteTitle(event);
     };
 
-    console.log('Spacing.SCALE_12', Spacing.SCALE_12);
-
+	useEffect(() => {
+		if (!noteId) {
+			const newId = onGenerateId();
+			onUpdateNoteId(newId);
+		}
+	},[])
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView
@@ -88,15 +111,21 @@ const NotoEditor = () => {
                     />
                     <RichEditor
                         ref={richText}
-						style={{ flex: 1 }}
-                        onChange={descriptionText => {}}
+                        style={{flex: 1}}
+						onChange={body => {
+							console.log('-----------------------------------------------')
+							console.log('body', body)
+							console.log('-----------------------------------------------')
+                            onUpdateNoteBody(body);
+                        }}
                         placeholder="No addition text..."
                         disabled={false}
                         useContainer={true}
                         onCursorPosition={onCursorPosition}
-                        pasteAsPlainText={true}
+						pasteAsPlainText={true}
+						initialContentHTML={body}
                         editorStyle={{
-							color: Colors.TEXT_BASE,
+                            color: Colors.TEXT_BASE,
                             contentCSSText: `
 								font-family: sans-serif; 
 								font-size: 18px;
@@ -107,8 +136,8 @@ const NotoEditor = () => {
 								line-height: 24px;
 							`,
                         }}
-					/>
-					<View style={{height: 10}} />
+                    />
+                    <View style={{height: 10}} />
                 </KeyboardAvoidingView>
             </ScrollView>
             <View
@@ -183,4 +212,21 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NotoEditor;
+const mapStateToProps = ({noteState}: IStoreState) => {
+    const title = noteState.title;
+	const body = noteState.body;
+	const noteId = noteState.id;
+	return {
+		noteId,
+		title,
+		body
+    };
+};
+
+const mapActionToProps = {
+	onUpdateNoteId: actionNote.updateNoteId,
+    onUpdateNoteTitle: actionNote.updateNoteTitle,
+	onUpdateNoteBody: actionNote.updateNoteBody,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(NotoEditor);
