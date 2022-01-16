@@ -1,10 +1,36 @@
 import EmptyList from '@/components/EmptyList';
-import React from 'react';
+import Layout from '@/components/Layout';
+import ListsNote from '@/components/ListsNote';
+import {INote, IStoreState} from '@/store/types';
+import React, {FunctionComponent} from 'react';
+import {connect} from 'react-redux';
 
-const FavoriteScreen = () => {
+interface FavoriteScreenProps {
+    listsNote: INote[];
+}
+const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({listsNote}) => {
+    if (listsNote.length === 0) {
+        return <EmptyList />;
+	}
+	const listsNoteFavorite = listsNote.filter(note => note.is_favorite)
+
+	if (listsNoteFavorite.length === 0) {
+        return <EmptyList />;
+	}
     return (
-		<EmptyList />
+        <Layout>
+            <ListsNote listNote={listsNoteFavorite} />
+        </Layout>
     );
 };
 
-export default FavoriteScreen;
+const mapStateToProps = ({listsState}: IStoreState) => {
+    const listsNote = listsState.lists;
+    return {
+        listsNote,
+    };
+};
+
+const mapActionToProps = {};
+
+export default connect(mapStateToProps, mapActionToProps)(FavoriteScreen);
