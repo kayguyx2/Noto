@@ -48,9 +48,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
         const onOpenEditNote = () => {
             navigation.navigate('editor', {
                 status: 'edit',
-                noteId: item.id,
-                title: item.title,
-                body: item.body,
+                note: item,
             });
         };
 
@@ -91,7 +89,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
                         </View>
                         <View style={styles.cardMenuStyle}>
                             <Text style={styles.dateTimeStyle}>
-                                {moment(item.updated_at).format('MM ddd YYYY')}
+                                {moment(item.updated_at).format('DD MMM YYYY')}
                             </Text>
                         </View>
                         <View

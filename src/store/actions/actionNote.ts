@@ -4,14 +4,18 @@ import {
     IUpdateNoteBody,
     IUpdateNoteId,
     IResetNote,
-    ICreateNote,
+    IUpdateNote,
     INote,
+    IUpdateNoteStatusFavorite,
+    IUpdateNoteStatusArchive,
+    IUpdateNoteCreateAt,
+    IUpdateNoteUpdateAt,
 } from '@/store/types';
 
 const noteAction = {
-    createNote(payload: INote): ICreateNote {
+    updateNote(payload: INote): IUpdateNote {
         return {
-            type: NOTE_TYPE.CREATE_NEW_NOTE,
+            type: NOTE_TYPE.UPDATE_NOTE,
             payload: payload,
         };
     },
@@ -33,6 +37,30 @@ const noteAction = {
             payload: body,
         };
     },
+    updateNoteCreateAt(datetime: string): IUpdateNoteCreateAt {
+        return {
+            type: NOTE_TYPE.UPDATE_NOTE_CREATE_AT,
+            payload: datetime,
+        };
+    },
+    updateNoteUpdateAt(datetime: string): IUpdateNoteUpdateAt {
+        return {
+            type: NOTE_TYPE.UPDATE_NOTE_UPDATE_AT,
+            payload: datetime,
+        };
+    },
+    updateNoteStatusFavorite(status: boolean): IUpdateNoteStatusFavorite {
+        return {
+            type: NOTE_TYPE.UPDATE_STATUS_FAVORITE,
+            payload: status,
+        };
+    },
+    updateNoteStatusArchive(status: boolean): IUpdateNoteStatusArchive {
+        return {
+            type: NOTE_TYPE.UPDATE_STATUS_ARCHIVE,
+            payload: status,
+        };
+    },
     resetNote(): IResetNote {
         return {
             type: NOTE_TYPE.RESET_NOTE,
@@ -43,8 +71,12 @@ const noteAction = {
 
 export default noteAction;
 export type NoteActionTypes =
-    | ICreateNote
+    | IUpdateNote
     | IUpdateNoteId
     | IUpdateNoteTitle
     | IUpdateNoteBody
-    | IResetNote;
+    | IResetNote
+    | IUpdateNoteCreateAt
+    | IUpdateNoteUpdateAt
+    | IUpdateNoteStatusFavorite
+    | IUpdateNoteStatusArchive;

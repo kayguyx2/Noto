@@ -10,11 +10,18 @@ const EmptyList = () => {
     const onCreateEditor = () => {
         navigation.navigate('editor', {
             status: 'new',
-            noteId: '',
-            title: '',
-            body: '',
+            note: {
+                id: '',
+                title: '',
+                body: '',
+                created_at: '',
+                updated_at: '',
+                is_favorite: false,
+                is_archived: false,
+            },
         });
-    };
+	};
+	
     return (
         <Layout>
             <View style={styles.container}>

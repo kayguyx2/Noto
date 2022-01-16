@@ -29,8 +29,8 @@ export type IStoreStateTypes = INote & ILists;
 // =================
 // ACTIONS
 // =================
-export interface ICreateNote {
-    type: NOTE_TYPE.CREATE_NEW_NOTE;
+export interface IUpdateNote {
+    type: NOTE_TYPE.UPDATE_NOTE;
     payload: INote;
 }
 export interface IUpdateNoteId {
@@ -44,6 +44,22 @@ export interface IUpdateNoteTitle {
 export interface IUpdateNoteBody {
     type: NOTE_TYPE.UPDATE_NOTE_BODY;
     payload: string;
+}
+export interface IUpdateNoteCreateAt {
+    type: NOTE_TYPE.UPDATE_NOTE_CREATE_AT;
+    payload: string;
+}
+export interface IUpdateNoteUpdateAt {
+    type: NOTE_TYPE.UPDATE_NOTE_UPDATE_AT;
+    payload: string;
+}
+export interface IUpdateNoteStatusFavorite {
+    type: NOTE_TYPE.UPDATE_STATUS_FAVORITE;
+    payload: boolean;
+}
+export interface IUpdateNoteStatusArchive {
+    type: NOTE_TYPE.UPDATE_STATUS_ARCHIVE;
+    payload: boolean;
 }
 export interface IResetNote {
     type: NOTE_TYPE.RESET_NOTE;

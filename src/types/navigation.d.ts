@@ -1,11 +1,11 @@
+import { INote } from "@/store/types";
+
 export type AppRootParamList = {
     main: undefined;
-	editor: {
-		noteId: string,
-		status: string,
-		title: string,
-		body: string
-	};
+    editor: {
+        status: string;
+        note: INote
+    };
 };
 
 // This registers which makes navigation fully type-safe.

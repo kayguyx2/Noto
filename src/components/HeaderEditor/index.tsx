@@ -1,7 +1,13 @@
-import {RootStackParamList} from '@/App';
 import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
-import {INote, IStoreState} from '@/store/types';
+import {
+    INote,
+    IStoreState,
+    IUpdateNoteCreateAt,
+    IUpdateNoteStatusArchive,
+    IUpdateNoteStatusFavorite,
+    IUpdateNoteUpdateAt,
+} from '@/store/types';
 import {Colors} from '@/styles';
 import {AppRootParamList} from '@/types/navigation';
 import {validateCanSubmitCreateNote} from '@/utils/validate';
@@ -11,6 +17,7 @@ import {
     useNavigation,
     useRoute,
 } from '@react-navigation/native';
+import moment from 'moment';
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
@@ -22,6 +29,10 @@ interface HeaderEditorProps {
     note: INote;
     onCreateNewNote: (nav: NavigationProp<AppRootParamList>) => void;
     onResetNote: () => void;
+    onUpdateNoteCreateAt: (datetime: string) => IUpdateNoteCreateAt;
+    onUpdateNoteUpdateAt: (datetime: string) => IUpdateNoteUpdateAt;
+    onUpdateNoteStatusFavorite: (status: boolean) => IUpdateNoteStatusFavorite;
+    onUpdateNoteStatusArchive: (status: boolean) => IUpdateNoteStatusArchive;
 }
 
 const RADIUS = 30;
@@ -31,10 +42,14 @@ const HEIGHT = CONTENT_HEIGHT + FOOTER_HEIGHT;
 
 const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
     note,
-    onCreateNewNote,
     onResetNote,
+    onUpdateNoteCreateAt,
+    onUpdateNoteUpdateAt,
+    onUpdateNoteStatusFavorite,
+    onUpdateNoteStatusArchive,
+    onCreateNewNote,
 }) => {
-    const route = useRoute<RouteProp<RootStackParamList, 'editor'>>();
+    const route = useRoute<RouteProp<AppRootParamList, 'editor'>>();
     const statusEditor = route.params.status;
     const navigation = useNavigation();
     const canSubmitNote = validateCanSubmitCreateNote(note);
@@ -44,7 +59,14 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
         onResetNote();
     };
 
-    const onSubmit = () => {
+	const onSubmit = () => {
+        if (statusEditor === 'new') {
+            onUpdateNoteCreateAt(moment().format());
+            onUpdateNoteUpdateAt(moment().format());
+        }
+		if (statusEditor === 'edit') {
+            onUpdateNoteUpdateAt(moment().format());
+        }
         onCreateNewNote(navigation);
     };
 
@@ -116,8 +138,12 @@ const mapStateToProps = ({noteState}: IStoreState) => {
 };
 
 const mapActionToProps = {
-    onCreateNewNote: thunkLists.createNote,
+    onUpdateNoteCreateAt: actionNote.updateNoteCreateAt,
+    onUpdateNoteUpdateAt: actionNote.updateNoteUpdateAt,
+    onUpdateNoteStatusFavorite: actionNote.updateNoteStatusFavorite,
+    onUpdateNoteStatusArchive: actionNote.updateNoteStatusArchive,
     onResetNote: actionNote.resetNote,
+    onCreateNewNote: thunkLists.createNote,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(HeaderEditor);

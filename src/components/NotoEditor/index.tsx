@@ -17,30 +17,33 @@ import {connect} from 'react-redux';
 import {
     INote,
     IStoreState,
+    IUpdateNote,
     IUpdateNoteBody,
     IUpdateNoteId,
     IUpdateNoteTitle,
 } from '@/store/types';
 import {onGenerateId} from '@/utils/generate';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {RootStackParamList} from '@/App';
+import {AppRootParamList} from '@/types/navigation';
 
 interface NotoEditorProps {
     noteId: string;
     title: string;
     body: string;
+    updateNote: (payload: INote) => IUpdateNote;
     onUpdateNoteId: (id: string | number[]) => IUpdateNoteId;
     onUpdateNoteTitle: (title: string) => IUpdateNoteTitle;
     onUpdateNoteBody: (body: string) => IUpdateNoteBody;
 }
 
 const NotoEditor: FunctionComponent<NotoEditorProps> = ({
-    title,
+	title,
+	updateNote,
     onUpdateNoteId,
     onUpdateNoteTitle,
     onUpdateNoteBody,
 }) => {
-    const route = useRoute<RouteProp<RootStackParamList, 'editor'>>();
+    const route = useRoute<RouteProp<AppRootParamList, 'editor'>>();
     const richText = React.useRef<RichEditor>();
     const scrollRef = React.useRef<ScrollView>();
 
@@ -63,13 +66,8 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
         }
 
         if (route.params.status === 'edit') {
-            const noteId = route.params.noteId;
-            const noteTitle = route.params.title;
-            const noteBody = route.params.body;
-
-            onUpdateNoteId(noteId);
-            onUpdateNoteTitle(noteTitle);
-            onUpdateNoteBody(noteBody);
+			const noteData = route.params.note;
+			updateNote(noteData);
         }
     }, []);
 
@@ -110,7 +108,7 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
                         useContainer={true}
                         onCursorPosition={onCursorPosition}
                         pasteAsPlainText={true}
-                        initialContentHTML={route.params.body}
+                        initialContentHTML={route.params.note.body}
                         editorStyle={{
                             color: Colors.TEXT_BASE,
                             contentCSSText: `
@@ -215,6 +213,7 @@ const mapActionToProps = {
     onUpdateNoteId: actionNote.updateNoteId,
     onUpdateNoteTitle: actionNote.updateNoteTitle,
     onUpdateNoteBody: actionNote.updateNoteBody,
+    updateNote: actionNote.updateNote,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(NotoEditor);

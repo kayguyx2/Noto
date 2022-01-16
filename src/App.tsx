@@ -11,20 +11,11 @@ import {
     StackNavigationOptions,
 } from '@react-navigation/stack';
 import {store, persistor} from '@/store';
+import { AppRootParamList } from './types/navigation';
 
 
 
-export type RootStackParamList = {
-	main: undefined;
-	editor: {
-		noteId: string,
-		status: string,
-		title: string,
-		body: string
-	};
-};
-
-const MainAppStack = createStackNavigator<RootStackParamList>();
+const MainAppStack = createStackNavigator<AppRootParamList>();
 const screenOptions: StackNavigationOptions = {
     gestureEnabled: true,
     gestureDirection: 'horizontal',
