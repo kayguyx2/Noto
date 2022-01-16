@@ -1,4 +1,5 @@
 import {INote} from '@/store/types';
+import moment from 'moment';
 
 export const insertOrUpdateNote = (
     lists: Array<INote>,
@@ -37,8 +38,17 @@ export const updateNoteFavoriteById = (
     const index = array.findIndex(note => note.id === noteId);
     if (index !== -1) {
         const tempNote = {...array[index]};
-        tempNote['is_favorite'] = status;
+		tempNote['is_favorite'] = status;
+		tempNote['updated_at'] = moment().format();
         array[index] = tempNote;
     }
     return array;
+};
+
+export const sortListsNoteByUpdateAt = (lists: Array<INote>): Array<INote> | [] => {
+    const array = [...lists];
+    const arraySort = array.sort((notePre, noteNext) => {
+        return moment(noteNext.updated_at).diff(moment(notePre.updated_at));
+    });
+    return arraySort;
 };
