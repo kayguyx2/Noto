@@ -3,34 +3,31 @@ import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
 import ListsNote from '@/components/ListsNote';
 import {INote, IStoreState} from '@/store/types';
-import { Colors } from '@/styles';
+import {Colors} from '@/styles';
 import React, {FunctionComponent} from 'react';
 import {connect} from 'react-redux';
 
 interface FavoriteScreenProps {
-    listsNote: INote[];
+    noteLists: INote[];
 }
-const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({listsNote}) => {
-    if (listsNote.length === 0) {
-        return <EmptyList />;
-	}
-	const listsNoteFavorite = listsNote.filter(note => note.is_favorite)
+const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({noteLists}) => {
+    const noteListsFavorite = noteLists.filter(note => note.is_favorite);
 
-	if (listsNoteFavorite.length === 0) {
-        return <EmptyList />;
-	}
+    if (noteLists.length === 0) return <EmptyList />;
+	if (noteListsFavorite.length === 0) return <EmptyList />;
+	
     return (
-		<Layout headerColor={Colors.WHITE}>
-			<HeaderMain />
-            <ListsNote listNote={listsNoteFavorite} />
+        <Layout headerColor={Colors.WHITE}>
+            <HeaderMain />
+            <ListsNote listNote={noteListsFavorite} />
         </Layout>
     );
 };
 
 const mapStateToProps = ({listsState}: IStoreState) => {
-    const listsNote = listsState.lists;
+    const noteLists = listsState.lists;
     return {
-        listsNote,
+        noteLists,
     };
 };
 
