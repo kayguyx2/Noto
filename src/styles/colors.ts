@@ -9,6 +9,7 @@ export const BLACK_OPACITY_25: COLOR_TYPE = 'rgba(0,0,0,.25)';
 export const BACKGROUND: COLOR_TYPE = '#FFFFFF';
 export const HEADER: COLOR_TYPE = '#c8dbdb';
 export const GREEN: COLOR_TYPE = '#4E9A7E';
+export const FAVORITE: COLOR_TYPE = '#fc5e72';
 
 // TEXT
 export const TEXT_BASE: COLOR_TYPE = '#222222';

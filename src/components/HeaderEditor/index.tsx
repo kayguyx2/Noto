@@ -59,15 +59,19 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
         onResetNote();
     };
 
-	const onSubmit = () => {
+    const onSubmit = () => {
         if (statusEditor === 'new') {
             onUpdateNoteCreateAt(moment().format());
             onUpdateNoteUpdateAt(moment().format());
         }
-		if (statusEditor === 'edit') {
+        if (statusEditor === 'edit') {
             onUpdateNoteUpdateAt(moment().format());
         }
         onCreateNewNote(navigation);
+    };
+
+    const onToggleStatusFavorite = () => {
+        onUpdateNoteStatusFavorite(!note.is_favorite);
     };
 
     return (
@@ -79,7 +83,8 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
                 <View style={styles.menuBar}>
                     <ButtonIcon
                         name="heart"
-                        onPress={() => {}}
+                        onPress={onToggleStatusFavorite}
+                        color={note.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
                         containerStyles={{marginRight: 10}}
                     />
                     <Button

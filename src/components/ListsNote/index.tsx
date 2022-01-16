@@ -1,5 +1,6 @@
+import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
-import {INote} from '@/store/types';
+import {INote, IUpdateNoteStatusFavorite} from '@/store/types';
 import {Colors, Spacing, Typography} from '@/styles';
 import {boxShadow} from '@/styles/mixins';
 import {convertStrippedHtml} from '@/utils/convert';
@@ -15,9 +16,14 @@ import ButtonIcon from '../ButtonIcon';
 interface ListsNoteProps {
     listNote: INote[];
     onRemoveNoteById: (noteId: string) => void;
+    onUpdateNoteStatusFavoriteById: (noteId: string, status: boolean) => void;
 }
 
-const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteById}) => {
+const ListsNote: FunctionComponent<ListsNoteProps> = ({
+    listNote,
+    onRemoveNoteById,
+    onUpdateNoteStatusFavoriteById,
+}) => {
     const navigation = useNavigation();
     let row: Array<any> = [];
     let prevOpenedRow;
@@ -29,6 +35,10 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
                 prevOpenedRow.close();
             }
             prevOpenedRow = row[index];
+        };
+
+        const onToggleStatusFavorite = () => {
+            onUpdateNoteStatusFavoriteById(item.id, !item.is_favorite);
         };
 
         const renderRightActions = (progress, dragX, onClick) => {
@@ -61,8 +71,8 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({listNote, onRemoveNoteByI
                 ref={ref => (row[index] = ref)}>
                 <ButtonIcon
                     name="heart"
-                    color={Colors.TEXT_BASE}
-                    onPress={() => Alert.alert('xxx')}
+                    color={item.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
+                    onPress={onToggleStatusFavorite}
                     containerStyles={{
                         zIndex: 101,
                         position: 'absolute',
@@ -210,6 +220,7 @@ const mapStateToProps = ({}) => {
 
 const mapActionToProps = {
     onRemoveNoteById: thunkLists.removeNote,
+    onUpdateNoteStatusFavoriteById: thunkLists.updateFavoriteById,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(ListsNote);
