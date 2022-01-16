@@ -12,6 +12,7 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {connect} from 'react-redux';
 import ButtonIcon from '../ButtonIcon';
+import Icon from 'react-native-vector-icons/Feather';
 
 interface ListsNoteProps {
     listNote: INote[];
@@ -69,17 +70,32 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
                 }
                 onSwipeableOpen={() => closeRow(index)}
                 ref={ref => (row[index] = ref)}>
-                <ButtonIcon
-                    name="heart"
-                    color={item.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
-                    onPress={onToggleStatusFavorite}
-                    containerStyles={{
-                        zIndex: 101,
-                        position: 'absolute',
-                        right: Spacing.SCALE_30,
-                        top: Spacing.SCALE_16,
-                    }}
-                />
+                {item.is_archived && (
+                    <ButtonIcon
+                        name="heart"
+                        color={item.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
+                        onPress={onToggleStatusFavorite}
+                        containerStyles={{
+                            zIndex: 101,
+                            position: 'absolute',
+                            right: Spacing.SCALE_30,
+                            top: Spacing.SCALE_16,
+                        }}
+                    />
+                )}
+                {!item.is_archived && (
+                    <ButtonIcon
+                        name="archive"
+                        color={item.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
+                        onPress={onToggleStatusFavorite}
+                        containerStyles={{
+                            zIndex: 101,
+                            position: 'absolute',
+                            right: Spacing.SCALE_30,
+                            top: Spacing.SCALE_16,
+                        }}
+                    />
+                )}
                 <TouchableWithoutFeedback onPress={onOpenEditNote}>
                     <View
                         style={[
@@ -98,9 +114,21 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
                             />
                         </View>
                         <View style={styles.cardMenuStyle}>
-                            <Text style={styles.dateTimeStyle}>
-                                {moment(item.updated_at).format('DD MMM YYYY')}
-                            </Text>
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+									alignItems: 'flex-end'
+                                }}>
+                                <Image
+                                    source={require('@/assets/images/clock.png')}
+                                    style={{width: 20, height: 20}}
+                                    resizeMode="contain"
+                                />
+                                <Text style={styles.dateTimeStyle}>
+									{moment(item.updated_at).format('DD/MM/YYYY')}
+                                </Text>
+                            </View>
                         </View>
                         <View
                             style={{
@@ -194,9 +222,10 @@ const styles = StyleSheet.create({
         width: 60,
     },
     dateTimeStyle: {
-        color: Colors.GRAY_DARK,
+        color: Colors.TEXT_BASE,
         fontSize: Typography.FONT_SIZE_14,
-        fontFamily: Typography.FONT_FAMILY_REGULAR,
+		fontFamily: Typography.FONT_FAMILY_REGULAR,
+        marginLeft: 5,
     },
     titleStyle: {
         color: Colors.TEXT_BASE,

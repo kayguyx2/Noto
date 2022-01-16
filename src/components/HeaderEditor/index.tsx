@@ -62,7 +62,8 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
     const onSubmit = () => {
         if (statusEditor === 'new') {
             onUpdateNoteCreateAt(moment().format());
-            onUpdateNoteUpdateAt(moment().format());
+			onUpdateNoteUpdateAt(moment().format());
+			onUpdateNoteStatusArchive(true);
         }
         if (statusEditor === 'edit') {
             onUpdateNoteUpdateAt(moment().format());

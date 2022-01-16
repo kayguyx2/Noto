@@ -1,7 +1,9 @@
 import EmptyList from '@/components/EmptyList';
+import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
 import ListsNote from '@/components/ListsNote';
 import {INote, IStoreState} from '@/store/types';
+import { Colors } from '@/styles';
 import React, {FunctionComponent} from 'react';
 import {connect} from 'react-redux';
 
@@ -18,7 +20,8 @@ const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({listsNote}) => 
         return <EmptyList />;
 	}
     return (
-        <Layout>
+		<Layout headerColor={Colors.WHITE}>
+			<HeaderMain />
             <ListsNote listNote={listsNoteFavorite} />
         </Layout>
     );

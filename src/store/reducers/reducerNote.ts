@@ -13,7 +13,13 @@ const initialState: INote = {
 };
 
 export const noteState = (state = initialState, action: NoteActionTypes) => {
-    const {type, payload} = action;
+	const { type, payload } = action;
+	
+	if (type === NOTE_TYPE.UPDATE_STATUS_ARCHIVE) {
+		console.log('*****************')
+		console.log(payload)
+		console.log('*****************')
+	}
     switch (type) {
         case NOTE_TYPE.UPDATE_NOTE: {
             return {
@@ -60,7 +66,7 @@ export const noteState = (state = initialState, action: NoteActionTypes) => {
         case NOTE_TYPE.UPDATE_STATUS_ARCHIVE: {
             return {
                 ...state,
-                is_archive: payload,
+                is_archived: payload,
             };
         }
         case NOTE_TYPE.RESET_NOTE: {
