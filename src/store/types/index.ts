@@ -13,8 +13,7 @@ export interface INote {
 }
 
 export interface ILists {
-	lists: INote[];
-	test: number
+    lists: INote[];
 }
 
 // =================
@@ -51,13 +50,9 @@ export interface IResetNote {
     payload: null;
 }
 
-export interface IAddNote {
-    type: LISTS_TYPE.ADD_NOTE;
+export interface IUpdateNoteLists {
+    type: LISTS_TYPE.UPDATE_LISTS_NOTE;
     payload: INote[];
-}
-export interface ITest {
-    type: LISTS_TYPE.TEST;
-    payload: number;
 }
 
 // =================

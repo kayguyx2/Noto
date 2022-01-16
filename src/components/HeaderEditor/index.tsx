@@ -2,8 +2,9 @@ import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
 import {INote, IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
+import {AppRootParamList} from '@/types/navigation';
 import {validateCanSubmitCreateNote} from '@/utils/validate';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
@@ -13,8 +14,8 @@ import ButtonIcon from '../ButtonIcon';
 
 interface HeaderEditorProps {
     note: INote;
-	onCreateNewNote: () => void;
-	onResetNote: () => void;
+    onCreateNewNote: (nav: NavigationProp<AppRootParamList>) => void;
+    onResetNote: () => void;
 }
 
 const RADIUS = 30;
@@ -22,17 +23,21 @@ const CONTENT_HEIGHT = 60;
 const FOOTER_HEIGHT = 30;
 const HEIGHT = CONTENT_HEIGHT + FOOTER_HEIGHT;
 
-const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({note, onCreateNewNote, onResetNote}) => {
+const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
+    note,
+    onCreateNewNote,
+    onResetNote,
+}) => {
     const navigation = useNavigation();
     const canSubmitNote = validateCanSubmitCreateNote(note);
 
     const onGoBack = () => {
-		navigation.goBack();
-		onResetNote()
+        navigation.goBack();
+        onResetNote();
     };
 
     const onSubmit = () => {
-        onCreateNewNote();
+        onCreateNewNote(navigation);
     };
 
     return (
@@ -99,8 +104,8 @@ const mapStateToProps = ({noteState}: IStoreState) => {
 };
 
 const mapActionToProps = {
-	onCreateNewNote: thunkLists.createNote,
-	onResetNote: actionNote.resetNote
+    onCreateNewNote: thunkLists.createNote,
+    onResetNote: actionNote.resetNote,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(HeaderEditor);

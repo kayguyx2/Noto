@@ -1,16 +1,32 @@
 import {AppThunk, IStoreState} from '@/store/types';
 import {Dispatch} from 'redux';
 import {actionList, actionNote, StoreActionTypes} from '@/store/actions';
+import {NavigationProp} from '@react-navigation/native';
+import {AppRootParamList} from '@/types/navigation';
+import {removeNoteById} from '@/utils/core';
 
 export const createNote =
-    (): AppThunk =>
+    (navigation: NavigationProp<AppRootParamList>): AppThunk =>
     async (dispatch: Dispatch<StoreActionTypes>, getState: () => IStoreState) => {
-		try {
+        try {
             const {noteState, listsState} = getState();
             const oldLists = listsState.lists;
-			const newList = [...oldLists, noteState];
-            dispatch(actionList.addNote(newList));
+            const newList = [...oldLists, noteState];
+            dispatch(actionList.updateNoteList(newList));
             dispatch(actionNote.resetNote());
+            navigation.navigate('main');
+        } catch (err) {
+            console.log('[createNote] / ERROR:', err);
+        }
+    };
+
+export const removeNote =
+    (noteId: string): AppThunk =>
+    async (dispatch: Dispatch<StoreActionTypes>, getState: () => IStoreState) => {
+        try {
+            const {listsState} = getState();
+            const newList = removeNoteById(listsState.lists, noteId);
+            dispatch(actionList.updateNoteList(newList));
         } catch (err) {
             console.log('[createNote] / ERROR:', err);
         }

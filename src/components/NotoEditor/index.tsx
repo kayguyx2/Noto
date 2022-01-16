@@ -112,12 +112,7 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
                     <RichEditor
                         ref={richText}
                         style={{flex: 1}}
-						onChange={body => {
-							console.log('-----------------------------------------------')
-							console.log('body', body)
-							console.log('-----------------------------------------------')
-                            onUpdateNoteBody(body);
-                        }}
+						onChange={body => onUpdateNoteBody(body)}
                         placeholder="No addition text..."
                         disabled={false}
                         useContainer={true}

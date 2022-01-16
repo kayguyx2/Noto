@@ -15,6 +15,5 @@ export enum NOTE_TYPE {
 // TYPE LISTS
 // =================
 export enum LISTS_TYPE {
-    ADD_NOTE = 'ADD_NOTE',
-    TEST = 'TEST',
+    UPDATE_LISTS_NOTE = 'UPDATE_LISTS_NOTE',
 }

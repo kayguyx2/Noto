@@ -4,25 +4,15 @@ import {ListsActionTypes} from '../actions/actionLists';
 
 const initialState: ILists = {
     lists: [],
-    test: 1,
 };
 
 export const listsState = (state = initialState, action: ListsActionTypes) => {
-	const { type, payload } = action;
-	console.log('******************************************')
-    console.log('type:', type);
-	console.log('******************************************')
+    const {type, payload} = action;
     switch (type) {
-        case LISTS_TYPE.ADD_NOTE: {
+        case LISTS_TYPE.UPDATE_LISTS_NOTE: {
             return {
                 ...state,
                 lists: payload,
-            };
-        }
-        case LISTS_TYPE.TEST: {
-            return {
-                ...state,
-                test: payload,
             };
         }
         default:

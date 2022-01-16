@@ -1,6 +1,9 @@
 export type AppRootParamList = {
     main: undefined;
-    editor: undefined;
+	editor: {
+		noteId: string,
+		status: string
+	};
 };
 
 // This registers which makes navigation fully type-safe.
