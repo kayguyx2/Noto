@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Button from '../Button';
+import HeaderMain from '../HeaderMain';
 import Layout from '../Layout';
 
 const EmptyList = () => {
@@ -23,7 +24,8 @@ const EmptyList = () => {
 	};
 	
     return (
-        <Layout>
+		<Layout headerColor={Colors.WHITE}>
+			<HeaderMain />
             <View style={styles.container}>
                 <View style={styles.box}>
                     <Image

@@ -15,7 +15,10 @@ const MainTabBar = createBottomTabNavigator();
 const TabBarScreen = () => {
     const {Navigator, Screen} = MainTabBar;
     return (
-        <Navigator initialRouteName="note" tabBar={props => <TabBottomBar {...props} />}>
+        <Navigator
+            initialRouteName="note"
+            screenOptions={{headerShown: false,}}
+            tabBar={props => <TabBottomBar {...props} />}>
             <Screen name="note" component={HomeScreen} />
             <Screen name="favorite" component={FavoriteScreen} />
             <Screen name="archive" component={AchieveScreen} />

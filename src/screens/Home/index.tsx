@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import Layout from '@/components/Layout';
 import {Text} from 'react-native';
 import ListsNote from '@/components/ListsNote';
+import HeaderMain from '@/components/HeaderMain';
+import {Colors} from '@/styles';
 
 interface HomeScreenProps {
     listsNote: INote[];
@@ -13,14 +15,14 @@ interface HomeScreenProps {
 const HomeScreen: FunctionComponent<HomeScreenProps> = ({listsNote}) => {
     if (listsNote.length === 0) {
         return <EmptyList />;
-	}
-	
+    }
+
     return (
-        <Layout>
+        <Layout headerColor={Colors.WHITE}>
+            <HeaderMain />
             <ListsNote listNote={listsNote} />
         </Layout>
-	);
-	
+    );
 };
 
 const mapStateToProps = ({listsState}: IStoreState) => {
