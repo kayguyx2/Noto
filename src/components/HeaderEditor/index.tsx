@@ -45,7 +45,6 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
     onResetNote,
     onUpdateNoteCreateAt,
     onUpdateNoteUpdateAt,
-    onUpdateNoteStatusFavorite,
     onUpdateNoteStatusArchive,
     onCreateNewNote,
 }) => {
@@ -55,24 +54,32 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
     const canSubmitNote = validateCanSubmitCreateNote(note);
 
     const onGoBack = () => {
-        navigation.goBack();
-        onResetNote();
+        if (canSubmitNote && !note.is_archived) {
+            onDrafting();
+            onResetNote();
+        } else {
+            navigation.goBack();
+            onResetNote();
+        }
+    };
+
+    const onDrafting = () => {
+        onUpdateNoteCreateAt(moment().format());
+        onUpdateNoteUpdateAt(moment().format());
+        onCreateNewNote(navigation);
     };
 
     const onSubmit = () => {
         if (statusEditor === 'new') {
             onUpdateNoteCreateAt(moment().format());
+            onUpdateNoteUpdateAt(moment().format());
+            onUpdateNoteStatusArchive(true);
+        }
+        if (statusEditor === 'edit') {
 			onUpdateNoteUpdateAt(moment().format());
 			onUpdateNoteStatusArchive(true);
         }
-        if (statusEditor === 'edit') {
-            onUpdateNoteUpdateAt(moment().format());
-        }
         onCreateNewNote(navigation);
-    };
-
-    const onToggleStatusFavorite = () => {
-        onUpdateNoteStatusFavorite(!note.is_favorite);
     };
 
     return (
@@ -82,14 +89,13 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
                     <ButtonIcon name="arrow-left" onPress={onGoBack} />
                 </View>
                 <View style={styles.menuBar}>
-                    <ButtonIcon
-                        name="heart"
-                        onPress={onToggleStatusFavorite}
-                        color={note.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
-                        containerStyles={{marginRight: 10}}
-                    />
                     <Button
-                        content={statusEditor === 'new' ? 'save' : 'edit'}
+                        content={
+                            statusEditor === 'new' ||
+                            (statusEditor === 'edit' && !note.is_archived)
+                                ? 'save'
+                                : 'edit'
+                        }
                         disabled={!canSubmitNote}
                         onPress={onSubmit}
                     />

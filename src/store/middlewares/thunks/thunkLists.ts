@@ -7,6 +7,7 @@ import {
     insertOrUpdateNote,
     removeNoteById,
     sortListsNoteByUpdateAt,
+    updateNoteArchivedById,
     updateNoteFavoriteById,
 } from '@/utils/core';
 
@@ -42,7 +43,7 @@ export const updateFavoriteById =
     async (dispatch: Dispatch<StoreActionTypes>, getState: () => IStoreState) => {
         try {
             const {listsState} = getState();
-			const newList = updateNoteFavoriteById(noteId, listsState.lists, status);
+            const newList = updateNoteFavoriteById(noteId, listsState.lists, status);
             const newListSort = sortListsNoteByUpdateAt(newList);
             dispatch(actionList.updateNoteList(newListSort));
         } catch (err) {

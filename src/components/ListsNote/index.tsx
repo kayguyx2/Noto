@@ -83,19 +83,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
                         }}
                     />
                 )}
-                {!item.is_archived && (
-                    <ButtonIcon
-                        name="archive"
-                        color={item.is_favorite ? Colors.FAVORITE : Colors.GRAY_DARK}
-                        onPress={onToggleStatusFavorite}
-                        containerStyles={{
-                            zIndex: 101,
-                            position: 'absolute',
-                            right: Spacing.SCALE_30,
-                            top: Spacing.SCALE_16,
-                        }}
-                    />
-                )}
+
                 <TouchableWithoutFeedback onPress={onOpenEditNote}>
                     <View
                         style={[
@@ -118,7 +106,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
                                 style={{
                                     flexDirection: 'row',
                                     justifyContent: 'center',
-									alignItems: 'flex-end'
+                                    alignItems: 'flex-end',
                                 }}>
                                 <Image
                                     source={require('@/assets/images/clock.png')}
@@ -126,9 +114,12 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
                                     resizeMode="contain"
                                 />
                                 <Text style={styles.dateTimeStyle}>
-									{moment(item.updated_at).format('DD/MM/YYYY')}
+                                    {moment(item.updated_at).format('DD/MM/YYYY')}
                                 </Text>
                             </View>
+                            {!item.is_archived && (
+                                <Text style={styles.draftTextStyle}>Draft</Text>
+                            )}
                         </View>
                         <View
                             style={{
@@ -198,7 +189,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         height: 28,
-        paddingRight: Spacing.SCALE_8,
     },
     layoutBackgroundImageCard: {
         ...StyleSheet.absoluteFillObject,
@@ -224,8 +214,13 @@ const styles = StyleSheet.create({
     dateTimeStyle: {
         color: Colors.TEXT_BASE,
         fontSize: Typography.FONT_SIZE_14,
-		fontFamily: Typography.FONT_FAMILY_REGULAR,
+        fontFamily: Typography.FONT_FAMILY_REGULAR,
         marginLeft: 5,
+    },
+    draftTextStyle: {
+        color: Colors.GRAY_DARK,
+        fontSize: Typography.FONT_SIZE_18,
+        fontFamily: Typography.FONT_FAMILY_REGULAR,
     },
     titleStyle: {
         color: Colors.TEXT_BASE,

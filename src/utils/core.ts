@@ -38,8 +38,24 @@ export const updateNoteFavoriteById = (
     const index = array.findIndex(note => note.id === noteId);
     if (index !== -1) {
         const tempNote = {...array[index]};
-		tempNote['is_favorite'] = status;
-		tempNote['updated_at'] = moment().format();
+        tempNote['is_favorite'] = status;
+        tempNote['updated_at'] = moment().format();
+        array[index] = tempNote;
+    }
+    return array;
+};
+
+export const updateNoteArchivedById = (
+    noteId: string,
+    lists: Array<INote>,
+    status: boolean,
+): Array<INote> | [] => {
+    const array = [...lists];
+    const index = array.findIndex(note => note.id === noteId);
+    if (index !== -1) {
+        const tempNote = {...array[index]};
+        tempNote['is_archived'] = status;
+        tempNote['updated_at'] = moment().format();
         array[index] = tempNote;
     }
     return array;
