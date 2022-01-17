@@ -11,15 +11,10 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {connect} from 'react-redux';
 import ButtonIcon from '../ButtonIcon';
-
-interface ListsNoteProps {
-    listNote: INote[];
-    onRemoveNoteById: (noteId: string) => void;
-    onUpdateNoteStatusFavoriteById: (noteId: string, status: boolean) => void;
-}
+import {ListsNoteProps} from './noteLists.interface';
 
 const ListsNote: FunctionComponent<ListsNoteProps> = ({
-    listNote,
+    noteLists,
     onRemoveNoteById,
     onUpdateNoteStatusFavoriteById,
 }) => {
@@ -28,7 +23,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
     let prevOpenedRow;
 
     const renderItem = ({item, index}: {item: INote; index: number}, onClick) => {
-        const isLastIndex = listNote.length === index + 1;
+        const isLastIndex = noteLists.length === index + 1;
         const closeRow = index => {
             if (prevOpenedRow && prevOpenedRow !== row[index]) {
                 prevOpenedRow.close();
@@ -151,7 +146,7 @@ const ListsNote: FunctionComponent<ListsNoteProps> = ({
     return (
         <View style={styles.container}>
             <FlatList
-                data={listNote}
+                data={noteLists}
                 renderItem={v =>
                     renderItem(v, () => {
                         deleteItem(v);

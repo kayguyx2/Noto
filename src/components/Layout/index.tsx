@@ -1,9 +1,9 @@
 import {Colors} from '@/styles';
-import React, {Fragment} from 'react';
+import React, {Fragment, FunctionComponent} from 'react';
 import {StatusBar, StyleSheet, SafeAreaView, View, Platform} from 'react-native';
 import {LayoutProps} from './layout.interface';
 
-const Layout: React.FC<LayoutProps> = ({
+const Layout: FunctionComponent<LayoutProps> = ({
     headerColor = 'transparent',
     statusColor = 'transparent',
     barStyle = 'dark-content',

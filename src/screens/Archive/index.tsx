@@ -1,7 +1,7 @@
 import EmptyList from '@/components/EmptyList';
 import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
-import ListsNote from '@/components/ListsNote';
+import NoteLists from '@/components/NoteLists';
 import {IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
 import React, {FunctionComponent} from 'react';
@@ -17,7 +17,7 @@ const ArchiveScreen: FunctionComponent<ArchiveScreenProps> = ({noteLists}) => {
     return (
         <Layout headerColor={Colors.WHITE}>
             <HeaderMain />
-            <ListsNote listNote={noteListsArchived} />
+            <NoteLists noteLists={noteListsArchived} />
         </Layout>
     );
 };

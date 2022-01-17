@@ -1,30 +1,27 @@
 import React, {FunctionComponent} from 'react';
 import EmptyList from '@/components/EmptyList';
-import { IStoreState} from '@/store/types';
+import {IStoreState} from '@/store/types';
 import {connect} from 'react-redux';
 import Layout from '@/components/Layout';
-import ListsNote from '@/components/ListsNote';
+import NoteLists from '@/components/NoteLists';
 import HeaderMain from '@/components/HeaderMain';
 import {Colors} from '@/styles';
-import { HomeScreenProps } from './home.interface';
+import {HomeScreenProps} from './home.interface';
 
-const HomeScreen: FunctionComponent<HomeScreenProps> = ({listsNote}) => {
-    if (listsNote.length === 0) {
-        return <EmptyList />;
-    }
-
+const HomeScreen: FunctionComponent<HomeScreenProps> = ({noteLists}) => {
+    if (noteLists.length === 0) return <EmptyList />;
     return (
         <Layout headerColor={Colors.WHITE}>
             <HeaderMain />
-            <ListsNote listNote={listsNote} />
+            <NoteLists noteLists={noteLists} />
         </Layout>
     );
 };
 
 const mapStateToProps = ({listsState}: IStoreState) => {
-    const listsNote = listsState.lists;
+    const noteLists = listsState.lists;
     return {
-        listsNote,
+        noteLists,
     };
 };
 
