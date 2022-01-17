@@ -1,15 +1,8 @@
 import {Colors} from '@/styles';
 import React from 'react';
-import {GestureResponderEvent, Pressable, StyleProp, ViewStyle} from 'react-native';
+import {Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
-interface ButtonIconProps {
-    name: string;
-    size?: number;
-    color?: string;
-    containerStyles?: StyleProp<ViewStyle>;
-    onPress?: (event: GestureResponderEvent) => void;
-}
+import {ButtonIconProps} from './buttonIcon.interface';
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({
     name,
