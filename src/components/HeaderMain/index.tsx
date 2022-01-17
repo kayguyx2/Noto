@@ -42,7 +42,7 @@ const HeaderMain: FunctionComponent<HeaderMainProps> = ({noteList}) => {
                 <View style={styles.backIconLayout}>
                     <Image
                         source={require('@/assets/images/logo.png')}
-                        style={{width: 60, height: 60}}
+                        style={{width: 55, height: 55}}
                         resizeMode="contain"
                     />
                     <Text style={styles.titleTextStyles}>
