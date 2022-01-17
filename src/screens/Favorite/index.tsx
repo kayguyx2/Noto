@@ -1,3 +1,4 @@
+import EmptyFavorite from '@/components/EmptyFavorite';
 import EmptyList from '@/components/EmptyList';
 import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
@@ -12,7 +13,7 @@ const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({noteLists}) => 
 	const noteListsFavorite = noteLists.filter(note => note.is_favorite);
 	
     if (noteLists.length === 0) return <EmptyList />;
-	if (noteListsFavorite.length === 0) return <EmptyList />;
+	if (noteListsFavorite.length === 0) return <EmptyFavorite />;
 	
     return (
         <Layout headerColor={Colors.WHITE}>

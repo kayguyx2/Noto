@@ -81,6 +81,32 @@ export default class StaticTabBar extends React.PureComponent<StaticTabBarProps>
         ]).start();
     };
 
+    onTest = (identity: number, route: RouteProps, isFocused: boolean): void => {
+        const {value, state} = this.props;
+        const tabWidth = width / state.routes.length;
+        Animated.sequence([
+            Animated.parallel(
+                this.values.map(v =>
+                    Animated.timing(v, {
+                        toValue: 0,
+                        duration: 100,
+                        useNativeDriver: true,
+                    }),
+                ),
+            ),
+            Animated.parallel([
+                Animated.spring(value, {
+                    toValue: tabWidth * identity,
+                    useNativeDriver: true,
+                }),
+                Animated.spring(this.values[identity], {
+                    toValue: 1,
+                    useNativeDriver: true,
+                }),
+            ]),
+        ]).start();
+    };
+
     onTabPress(route: RouteProps, isFocused: boolean): void {
         const {navigation} = this.props;
         const event = navigation.emit({
@@ -90,6 +116,16 @@ export default class StaticTabBar extends React.PureComponent<StaticTabBarProps>
         });
         if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name);
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<StaticTabBarProps>): void {
+        if (prevProps.state.index !== this.props.state.index) {
+            this.onTest(
+                this.props.state.index,
+                this.props.state.routes[this.props.state.index],
+                true,
+            );
         }
     }
 
@@ -184,8 +220,8 @@ const styles = StyleSheet.create({
     },
     activeIcon: {
         backgroundColor: Colors.PRIMARY,
-        width: 51,
-        height: 51,
+        width: 50,
+        height: 50,
         borderRadius: 30,
         borderColor: 'white',
         justifyContent: 'center',
@@ -203,11 +239,12 @@ const styles = StyleSheet.create({
     textActiveInTab: {
         color: Colors.WHITE,
         paddingTop: 5,
-        fontSize: Typography.FONT_SIZE_16,
+		fontSize: Typography.FONT_SIZE_16,
+		lineHeight: Typography.LINE_HEIGHT_20,
     },
     textDeactiveInTab: {
         paddingTop: 5,
         color: Colors.WHITE,
-        fontSize: Typography.FONT_SIZE_16,
+		fontSize: Typography.FONT_SIZE_16,
     },
 });

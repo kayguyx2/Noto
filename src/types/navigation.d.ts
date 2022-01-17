@@ -2,6 +2,7 @@ import { INote } from "@/store/types";
 
 export type AppRootParamList = {
     main: undefined;
+    note: undefined;
     editor: {
         status: string;
         note: INote

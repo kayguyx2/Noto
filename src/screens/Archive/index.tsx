@@ -1,3 +1,4 @@
+import EmptyArchive from '@/components/EmptyArchive';
 import EmptyList from '@/components/EmptyList';
 import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
@@ -12,7 +13,7 @@ const ArchiveScreen: FunctionComponent<ArchiveScreenProps> = ({noteLists}) => {
     const noteListsArchived = noteLists.filter(note => note.is_archived);
 
     if (noteLists.length === 0) return <EmptyList />;
-    if (noteListsArchived.length === 0) return <EmptyList />;
+    if (noteListsArchived.length === 0) return <EmptyArchive />;
 
     return (
         <Layout headerColor={Colors.WHITE}>
