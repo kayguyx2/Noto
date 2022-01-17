@@ -8,8 +8,6 @@ import HeaderMain from '@/components/HeaderMain';
 import {Colors} from '@/styles';
 import { HomeScreenProps } from './home.interface';
 
-
-
 const HomeScreen: FunctionComponent<HomeScreenProps> = ({listsNote}) => {
     if (listsNote.length === 0) {
         return <EmptyList />;

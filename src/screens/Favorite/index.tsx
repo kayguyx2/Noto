@@ -2,14 +2,12 @@ import EmptyList from '@/components/EmptyList';
 import HeaderMain from '@/components/HeaderMain';
 import Layout from '@/components/Layout';
 import ListsNote from '@/components/ListsNote';
-import {INote, IStoreState} from '@/store/types';
+import { IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
 import React, {FunctionComponent} from 'react';
 import {connect} from 'react-redux';
+import { FavoriteScreenProps } from './favorite.interface';
 
-interface FavoriteScreenProps {
-    noteLists: INote[];
-}
 const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({noteLists}) => {
     const noteListsFavorite = noteLists.filter(note => note.is_favorite);
 
