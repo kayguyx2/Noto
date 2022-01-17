@@ -7,7 +7,6 @@ import {
     insertOrUpdateNote,
     removeNoteById,
     sortListsNoteByUpdateAt,
-    updateNoteArchivedById,
     updateNoteFavoriteById,
 } from '@/utils/core';
 

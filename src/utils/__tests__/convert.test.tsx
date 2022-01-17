@@ -1,6 +1,6 @@
 import {capitalizeFirstLetter, convertStrippedHtml} from '../convert';
 
-describe('Check convert stripped html', () => {
+describe('Test convert stripped html', () => {
     test('If data is correct', () => {
         const expectData = 'first test';
         const inputData = '<div>first test</div>';
@@ -21,10 +21,9 @@ describe('Check convert stripped html', () => {
         const result = convertStrippedHtml(inputData);
         expect(expectData).toBe(result);
 	});
-	
 });
 
-describe('Check capitalize first letter function', () => {
+describe('Test capitalize first letter function', () => {
     test('If data is correct', () => {
         const expectData = 'Home';
         const inputData = 'home';
