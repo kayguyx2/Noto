@@ -15,4 +15,7 @@ clean:
 
 	# use a backup
 	yarn install
-	cd ios && pod install 
+	cd ios && pod install
+
+zip:
+	git archive --format=zip HEAD -o Thanet_Thobood.zip
