@@ -1,22 +1,10 @@
 import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
-import {
-    INote,
-    IStoreState,
-    IUpdateNoteCreateAt,
-    IUpdateNoteStatusArchive,
-    IUpdateNoteStatusFavorite,
-    IUpdateNoteUpdateAt,
-} from '@/store/types';
+import {IStoreState} from '@/store/types';
 import {Colors} from '@/styles';
 import {AppRootParamList} from '@/types/navigation';
 import {validateCanSubmitCreateNote} from '@/utils/validate';
-import {
-    NavigationProp,
-    RouteProp,
-    useNavigation,
-    useRoute,
-} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import moment from 'moment';
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -24,16 +12,7 @@ import {connect} from 'react-redux';
 
 import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';
-
-interface HeaderEditorProps {
-    note: INote;
-    onCreateNewNote: (nav: NavigationProp<AppRootParamList>) => void;
-    onResetNote: () => void;
-    onUpdateNoteCreateAt: (datetime: string) => IUpdateNoteCreateAt;
-    onUpdateNoteUpdateAt: (datetime: string) => IUpdateNoteUpdateAt;
-    onUpdateNoteStatusFavorite: (status: boolean) => IUpdateNoteStatusFavorite;
-    onUpdateNoteStatusArchive: (status: boolean) => IUpdateNoteStatusArchive;
-}
+import {HeaderEditorProps} from './headerEditor.interface';
 
 const RADIUS = 30;
 const CONTENT_HEIGHT = 60;
@@ -76,8 +55,8 @@ const HeaderEditor: FunctionComponent<HeaderEditorProps> = ({
             onUpdateNoteStatusArchive(true);
         }
         if (statusEditor === 'edit') {
-			onUpdateNoteUpdateAt(moment().format());
-			onUpdateNoteStatusArchive(true);
+            onUpdateNoteUpdateAt(moment().format());
+            onUpdateNoteStatusArchive(true);
         }
         onCreateNewNote(navigation);
     };
