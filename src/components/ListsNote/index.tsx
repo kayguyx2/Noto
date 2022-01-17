@@ -1,18 +1,16 @@
-import {actionNote} from '@/store/actions';
 import {thunkLists} from '@/store/middlewares/thunks';
-import {INote, IUpdateNoteStatusFavorite} from '@/store/types';
+import {INote} from '@/store/types';
 import {Colors, Spacing, Typography} from '@/styles';
 import {boxShadow} from '@/styles/mixins';
 import {convertStrippedHtml} from '@/utils/convert';
 import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import React, {FunctionComponent} from 'react';
-import {Alert, FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {connect} from 'react-redux';
 import ButtonIcon from '../ButtonIcon';
-import Icon from 'react-native-vector-icons/Feather';
 
 interface ListsNoteProps {
     listNote: INote[];

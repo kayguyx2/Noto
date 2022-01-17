@@ -21,6 +21,7 @@
     "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.66.4",
+    "react-native-bootsplash": "^4.1.0",
     "react-native-cn-richtext-editor": "^1.0.43",
     "react-native-gesture-handler": "^2.1.1",
     "react-native-pell-rich-editor": "^1.8.8",

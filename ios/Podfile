@@ -16,6 +16,8 @@ target 'Noto' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RNBootSplash', :path => '../node_modules/react-native-bootsplash'
+
   target 'NotoTests' do
     inherit! :complete
     # Pods for testing
