@@ -1,16 +1,12 @@
-import {INote, IStoreState} from '@/store/types';
+import {IStoreState} from '@/store/types';
 import {Colors, Spacing, Typography} from '@/styles';
 import {capitalizeFirstLetter} from '@/utils/convert';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {FunctionComponent} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-
 import Button from '../Button';
-
-interface HeaderMainProps {
-    noteList: INote[] | [];
-}
+import {HeaderMainProps} from './headerMain.interface';
 
 const CONTENT_HEIGHT = 60;
 const HEIGHT = CONTENT_HEIGHT;
