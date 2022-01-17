@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // screen
 import HomeScreen from '@/screens/Home';
 import FavoriteScreen from '@/screens/Favorite';
-import AchieveScreen from '@/screens/Achieve';
+import AchieveScreen from '@/screens/Archive';
 
 // component
 import TabBottomBar from '@/components/TabBottomBar';
