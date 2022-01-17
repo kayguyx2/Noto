@@ -25,20 +25,11 @@ import {
 import {onGenerateId} from '@/utils/generate';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {AppRootParamList} from '@/types/navigation';
-
-interface NotoEditorProps {
-    noteId: string;
-    title: string;
-    body: string;
-    updateNote: (payload: INote) => IUpdateNote;
-    onUpdateNoteId: (id: string | number[]) => IUpdateNoteId;
-    onUpdateNoteTitle: (title: string) => IUpdateNoteTitle;
-    onUpdateNoteBody: (body: string) => IUpdateNoteBody;
-}
+import {NotoEditorProps} from './notoEditor.interface';
 
 const NotoEditor: FunctionComponent<NotoEditorProps> = ({
-	title,
-	updateNote,
+    title,
+    updateNote,
     onUpdateNoteId,
     onUpdateNoteTitle,
     onUpdateNoteBody,
@@ -66,8 +57,8 @@ const NotoEditor: FunctionComponent<NotoEditorProps> = ({
         }
 
         if (route.params.status === 'edit') {
-			const noteData = route.params.note;
-			updateNote(noteData);
+            const noteData = route.params.note;
+            updateNote(noteData);
         }
     }, []);
 
