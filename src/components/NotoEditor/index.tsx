@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({noteState, listsState}: IStoreState) => {
+const mapStateToProps = ({noteState}: IStoreState) => {
     const noteId = noteState.id;
     const title = noteState.title;
     const body = noteState.body;
