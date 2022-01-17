@@ -18,4 +18,4 @@ clean:
 	cd ios && pod install
 
 zip:
-	git archive --format=zip HEAD -o Thanet_Thobood.zip
+	git archive --format=zip HEAD -o Thanet_Thobood.zip develop
