@@ -1,24 +1,7 @@
 import {Colors, Typography} from '@/styles';
 import React from 'react';
-import {
-    GestureResponderEvent,
-    StyleProp,
-    StyleSheet,
-    Text,
-    TextStyle,
-    TouchableOpacity,
-    View,
-    ViewStyle,
-} from 'react-native';
-
-interface ButtonProps {
-    content?: string;
-    color?: string;
-    containerStyles?: StyleProp<ViewStyle>;
-    disabled?: boolean;
-    textStyles?: StyleProp<TextStyle>;
-    onPress?: (event: GestureResponderEvent) => void;
-}
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ButtonDisabledStyle, ButtonProps} from './button.interface';
 
 const Button: React.FC<ButtonProps> = ({
     content,
@@ -28,11 +11,7 @@ const Button: React.FC<ButtonProps> = ({
     textStyles = {},
     color = Colors.PRIMARY,
 }) => {
-	
-    const disabledStyle: StyleProp<ViewStyle> = {
-        opacity: 0.5,
-    };
-
+    const disabledStyle: ButtonDisabledStyle = {opacity: 0.5};
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.78} disabled={disabled}>
             <View
