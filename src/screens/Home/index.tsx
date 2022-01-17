@@ -1,53 +1,37 @@
-import Button from '@/components/Button';
+import React, {FunctionComponent} from 'react';
+import EmptyList from '@/components/EmptyList';
+import {INote, IStoreState} from '@/store/types';
+import {connect} from 'react-redux';
 import Layout from '@/components/Layout';
-import {Typography, Colors} from '@/styles';
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {Text} from 'react-native';
+import ListsNote from '@/components/ListsNote';
+import HeaderMain from '@/components/HeaderMain';
+import {Colors} from '@/styles';
 
-const HomeScreen = () => {
+interface HomeScreenProps {
+    listsNote: INote[];
+}
+
+const HomeScreen: FunctionComponent<HomeScreenProps> = ({listsNote}) => {
+    if (listsNote.length === 0) {
+        return <EmptyList />;
+    }
+
     return (
-        <Layout>
-            <View style={styles.container}>
-                <View style={styles.box}>
-                    <Image
-                        source={require('@/assets/images/notion.png')}
-                        style={{width: 180, height: 180}}
-                    />
-                    <Text style={[Typography.FONT.REGULAR, styles.title]}>
-                        Let's record it for the first time.
-                    </Text>
-                    <Text style={[Typography.FONT.LIGHT, styles.description]}>
-                        for the first article We recommend introducing yourself and
-                        writing what you would like to do in the future.
-                    </Text>
-                    <Button content="Create" />
-                </View>
-            </View>
+        <Layout headerColor={Colors.WHITE}>
+            <HeaderMain />
+            <ListsNote listNote={listsNote} />
         </Layout>
     );
 };
 
-const styles = StyleSheet.create({
-    title: {
-        fontSize: Typography.FONT_SIZE_18,
-        marginBottom: 8,
-    },
-    description: {
-        fontSize: Typography.FONT_SIZE_16,
-        color: Colors.GRAY_DARK,
-        marginBottom: 12,
-	},
-	container: {
-		flex: 1
-	},
-	box: {
-		alignItems: 'center',
-		backgroundColor: Colors.SECONDARY,
-		justifyContent: 'center',
-        paddingVertical: 38,
-        paddingHorizontal: 24,
-        height: '100%',
-    },
-});
+const mapStateToProps = ({listsState}: IStoreState) => {
+    const listsNote = listsState.lists;
+    return {
+        listsNote,
+    };
+};
 
-export default HomeScreen;
+const mapActionToProps = {};
+
+export default connect(mapStateToProps, mapActionToProps)(HomeScreen);

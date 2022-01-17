@@ -7,25 +7,26 @@ import {Colors} from '@/styles';
 import React, {FunctionComponent} from 'react';
 import {connect} from 'react-redux';
 
-interface FavoriteScreenProps {
+interface AchieveScreenProps {
     noteLists: INote[];
 }
-const FavoriteScreen: FunctionComponent<FavoriteScreenProps> = ({noteLists}) => {
-    const noteListsFavorite = noteLists.filter(note => note.is_favorite);
-
+const AchieveScreen: FunctionComponent<AchieveScreenProps> = ({noteLists}) => {
+	const noteListsArchived = noteLists.filter(note => note.is_archived);
+	
     if (noteLists.length === 0) return <EmptyList />;
-	if (noteListsFavorite.length === 0) return <EmptyList />;
+	if (noteListsArchived.length === 0) return <EmptyList />;
 	
     return (
         <Layout headerColor={Colors.WHITE}>
             <HeaderMain />
-            <ListsNote listNote={noteListsFavorite} />
+            <ListsNote listNote={noteListsArchived} />
         </Layout>
     );
 };
 
 const mapStateToProps = ({listsState}: IStoreState) => {
     const noteLists = listsState.lists;
+
     return {
         noteLists,
     };
@@ -33,4 +34,4 @@ const mapStateToProps = ({listsState}: IStoreState) => {
 
 const mapActionToProps = {};
 
-export default connect(mapStateToProps, mapActionToProps)(FavoriteScreen);
+export default connect(mapStateToProps, mapActionToProps)(AchieveScreen);

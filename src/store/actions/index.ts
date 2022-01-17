@@ -1,9 +1,6 @@
+import actionNote, {NoteActionTypes} from './actionNote';
+import actionList, {ListsActionTypes} from './actionLists';
 
-import actionUser, { UserActionTypes } from './actionUser'
-import actionSubscription, { SubscriptionActionTypes } from './actionSubscription'
+export {actionNote, actionList};
 
-export {
-  actionUser,
-  actionSubscription,
-}
-export type StoreActionTypes = UserActionTypes & SubscriptionActionTypes
+export type StoreActionTypes = NoteActionTypes | ListsActionTypes;

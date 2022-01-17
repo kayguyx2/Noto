@@ -3,15 +3,16 @@ import React, {Fragment} from 'react';
 import {StatusBar, StyleSheet, SafeAreaView, View, Platform} from 'react-native';
 import {LayoutProps} from './layout.interface';
 
-const Layout: React.FC<LayoutProps> = ({statusColor = 'transparent', children}) => {
+const Layout: React.FC<LayoutProps> = ({
+    headerColor = 'transparent',
+    statusColor = 'transparent',
+    barStyle = 'dark-content',
+    children,
+}) => {
     return (
         <Fragment>
-            <StatusBar
-                translucent
-                backgroundColor={statusColor}
-                barStyle="dark-content"
-            />
-            <SafeAreaView style={styles.layout}>
+            <StatusBar translucent backgroundColor={statusColor} barStyle={barStyle} />
+            <SafeAreaView style={[styles.layout, {backgroundColor: headerColor}]}>
                 <View style={styles.container}>{children}</View>
             </SafeAreaView>
             <SafeAreaView style={styles.footer} />
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 0,
-        backgroundColor: Colors.PRIMARY,
+        backgroundColor: Colors.BACKGROUND,
     },
 });
 

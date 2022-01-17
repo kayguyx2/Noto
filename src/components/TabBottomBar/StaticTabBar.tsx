@@ -36,18 +36,18 @@ export default class StaticTabBar extends React.PureComponent<StaticTabBarProps>
         super(props);
         const {state} = this.props;
         this.values = state.routes.map(route => {
-            return new Animated.Value(route.name === 'home' ? 1 : 0);
+            return new Animated.Value(route.name === 'note' ? 1 : 0);
         });
     }
 
     getNameIcon = (routeName: string) => {
         switch (routeName) {
-            case 'home':
-                return 'box';
+            case 'note':
+                return 'folder';
             case 'favorite':
                 return 'heart';
-            case 'setting':
-                return 'file-text';
+            case 'archive':
+                return 'archive';
             default:
                 return 'box`';
         }
