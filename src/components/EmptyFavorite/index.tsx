@@ -7,9 +7,9 @@ import HeaderMain from '../HeaderMain';
 import Layout from '../Layout';
 
 const EmptyFavorite = () => {
-	const navigation = useNavigation();
-	const onCreateEditor = () => {
-		navigation.navigate('note')
+    const navigation = useNavigation();
+    const onCreateEditor = () => {
+        navigation.navigate('note');
     };
 
     return (

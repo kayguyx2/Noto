@@ -18,9 +18,9 @@ clean:
 	cd ios && pod install
 
 zip:
-	git archive --format=zip HEAD -o temp.zip
-	unzip temp.zip -d temp
-	cp -r .git temp/.git
-	zip -r Thanet_Thobood.zip temp
-	rm -rf ./temp
-	rm -f temp.zip
+	git archive --format=zip HEAD -o noto.zip
+	unzip noto.zip -d noto
+	cp -r .git noto/.git
+	zip -r Thanet_Thobood.zip noto
+	rm -rf ./noto
+	rm -f noto.zip
