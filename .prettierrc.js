@@ -4,7 +4,7 @@ module.exports = {
     singleQuote: true,
     trailingComma: 'all',
     arrowParens: 'avoid',
-    tabWidth: 4,
-	tabSize: 4,
-	printWidth: 90,
+    tabWidth: 2,
+    tabSize: 2,
+    printWidth: 90,
 };
